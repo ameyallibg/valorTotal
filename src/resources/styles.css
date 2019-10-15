@@ -1,0 +1,115 @@
+
+.ot-color{
+    color:#6161c1;
+}
+.ot-center{
+    text-align: center;
+
+}
+
+.ot-box-column{
+    display: flex;
+    flex-direction: column;
+    
+}
+.ot-box-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.center-box{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+
+}
+
+
+.calendarInput{
+    border-radius: 4px;
+    border-style: solid;
+    border-width: thin;
+    border-color:black;
+   
+}
+.modal-inner{
+    margin-left: 16.6%;
+    margin-top:30%;
+    width: 66%;
+    border: solid;
+    border-color: #80808054;
+    border-radius: 6px;
+    padding: 2%;
+    background-color: white;
+
+}
+.text-align-left{
+    text-align: left
+}
+
+.form-group-style{
+    border:none;
+    
+}
+.title-style{
+    display:none;
+}
+
+@media(min-width: 680px){
+
+    .center-box{
+        margin-left: 20%;
+        margin-right: 20%;
+        padding-top:15%;
+        padding: 5%;
+        padding-right: 10%;
+        
+        border-style: solid;
+        border-width: thin;
+        border-color: gray;
+
+        
+
+    }
+    .flex-direction-row{
+        display: flex;
+        flex-direction: row;
+    }
+    .modal-inner{
+        margin-left: 33%;
+        margin-top:10%;
+        width: 33%;
+    }
+    
+    .form-group-style{
+        border:solid;
+        border-color: gray;
+        border-width: thin
+    }
+    .button-enviar{
+        margin-left: 42.5%;
+        width: 15%;
+    }
+    .div-form{
+        
+        background: linear-gradient(to bottom, #3471ab 0%, #756da0 7%, #776dad 19%, #5e51a6 31%, #413486 44%, #5e51a6 55%, #6256a9 67%, #7a6ad0 77%, #5e51a6 89%, #2966ad 100%);
+    }
+    .style-form{
+        
+        background: white;
+    }
+    .text-align-items{
+        text-align: center
+    }
+    .title-style{
+        padding:5%;
+        color:white;
+        display:block;
+
+    }
+    .width-input{
+        width: 50% !important;
+    }
+    
+   
+}
