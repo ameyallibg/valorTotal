@@ -27,36 +27,44 @@ export const AppContext = React.createContext()
         this.setState({modalIsOpen: false});
       }
    //Actualizacion del estado por cada cambio de valor
-    handleChange(e){
+    handleChange = (e)=>{
 
-        let newState = Object.assign(
-            this.state.newOrder, {[e.target.name]:e.target.value}
-        )
+        let newState =  Object.assign({}, this.state.newOrder, {[e.target.name]:e.target.value})
+       
             
-        
         
         this.setState({ 
             newOrder:newState
         })
         console.log(this.state.newOrder)
-    }
+        
+        
+    } 
     
 
     //Validacion del formulario
     handleSubmit = (e)  => {
-        console.log(this.state.newOrder)
+        
         e.preventDefault();
         if(!this.validate()){
             return
         }
         
+       
+        document.getElementById("formClear").reset();
+        
+       
+        
+    
 
         this.setState({
             list: this.state.newOrder,
+            newOrder:[]
            
 
 
-        })
+        },()=> {console.log(this.state.list)})
+        
         
         
        

@@ -20,8 +20,8 @@ class  OrdenTrabajo extends React.Component {
     return ( 
         //Ceacion formulario
         <div className="div-form">
-            <h3 className="text-align-items title-style">Grupo Anepsa</h3>
-        <Form  className="center-box style-form" onSubmit={handleSubmit}>
+            <h3 className="text-align-items title-style">.</h3>
+        <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmit}>
         <h5 className="ot-color ot-center">ORDEN DE TRABAJO</h5>
        
             <FormGroup  >

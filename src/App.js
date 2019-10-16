@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navegador from './components/Navbar'
 import './resources/styles.css';
 import ListaOrdenes from './components/ListaOrdenes'
 import OrdenTrabajo from "./components/OrdenTrabajo"
+import OrdenCreada from "./components/OrdenCreada"
 import {AppContextProvider, AppContext} from "./AppContext";
 
 OrdenTrabajo.contextType = AppContext;
 ListaOrdenes.contextType = AppContext;
+OrdenCreada.contextType = AppContext;
 
 class App extends Component{
 
@@ -20,12 +22,14 @@ class App extends Component{
  
     <BrowserRouter>
     <div className="App">
-            <Navbar></Navbar>
+            <Navegador></Navegador>
+            <Route exact path="/" render={() => <ListaOrdenes />} />
             <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
+            <Route path="/OrdenCreada" render={() => <OrdenCreada />} />
    </div>
       
       </BrowserRouter>
-      <ListaOrdenes />
+      
       
       
       </AppContextProvider>
