@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import db from "./Fire.js";
 
 export const AppContext = React.createContext()
 
@@ -7,14 +8,17 @@ export const AppContext = React.createContext()
         super(props)
         //Datos que se obtienen de las respuestas del formulario
         this.state ={
-            newOrder:[],
-            list:[],
-            
+            vendedor:"",
+            uge:"",
+            estatus:"",
+            productClave:"",
+            dateNew: new Date().toLocaleString(),
+            items:[] 
            
         }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.productClave = this.productClave.bind(this);
+   
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     }
@@ -28,15 +32,11 @@ export const AppContext = React.createContext()
       }
    //Actualizacion del estado por cada cambio de valor
     handleChange = (e)=>{
-
-        let newState =  Object.assign({}, this.state.newOrder, {[e.target.name]:e.target.value})
-       
-            
         
         this.setState({ 
-            newOrder:newState
+            [e.target.name]:e.target.value
         })
-        console.log(this.state.newOrder)
+        console.log(this.state)
         
         
     } 
@@ -51,30 +51,72 @@ export const AppContext = React.createContext()
         }
         
        
-        document.getElementById("formClear").reset();
+            const uge =  this.state.uge ;
+            console.log(this.state.uge)
+            const ugeClave = uge.substr(0,3).toUpperCase(); 
+            const date = this.state.dateNew;
+            const dateClave = date.substr(2,5).replace("-","");   
         
-       
-        
-    
+                this.setState({
+                    productClave: dateClave  + ugeClave 
+                })
 
-        this.setState({
-            list: this.state.newOrder,
-            newOrder:[]
+                console.log(this.state.productClave)
            
 
+                document.getElementById("formClear").reset();
+    
+          db.collection("orden").add({
+          
+            vendedor: this.state.vendedor,
+            uge: this.state.uge,
+            dateNew: this.state.dateNew,
+            estatus: this.state.estatus,
+            productClave: this.state.productClave,
+          
+         })
 
-        },()=> {console.log(this.state.list)})
         
         
-        
-       
+        this.setState({
+           vendedor:"",
+           uge:"",
+           fecha:"",
+           estatus:"",
+           productClave:"",
+
+        })
     }
+
+    componentWillMount() {
+        db.collection("orden")
+          .get()
+          .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+            console.log(data);
+            this.setState({ items: data });
+          }, console.log(this.state.items));
+      }
+
+
+      componentWillUpdate(){
+        db.collection("orden")
+        .get()
+        .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+          
+          this.setState({ items: data });
+        });
+    }
+ 
+
+    
     
     
     validate(){
-        const state = this.state.newOrder
+        const state = this.state.uge
        
-        if(state.uge === '' ){
+        if(state === '' ){
             this.setState({
                 modalIsOpen:true,
                 message:'Contesta los campos obligatorios'
@@ -88,22 +130,12 @@ export const AppContext = React.createContext()
         return true
     }
     //Generador de clave unica
-    productClave (){
-        const uge =  this.state.uge ;
-        const ugeClave = uge.substr(0,3).toUpperCase(); 
-        const date = this.state.dateNew;
-        const dateClave = date.substr(2,5).replace("-","");   
-    
-            this.setState({
-                productClave: dateClave  + ugeClave 
-    
-            })
-        }
+
     
 
   
     render() {
-        const {newOrder, list} = this.state;
+        const {newOrder, list, items} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -116,7 +148,8 @@ export const AppContext = React.createContext()
           openModal:this.openModal,
           closeModal:this.closeModal,
           newOrder,
-          list
+          list,
+          items
 
         }}
         >

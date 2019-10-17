@@ -31,8 +31,8 @@ class  OrdenTrabajo extends React.Component {
                 <Input  type="text" name="vendedor" value={vendedor} onChange={handleChange} />
                  <Label  >Fecha OT<span className="text-danger">*</span> </Label>
             <Input className="width-input" name="dateNew" value={dateNew} onChange={handleChange} type="date"/>
-            <Label >Clave del proyecto <span className="text-danger">*</span> </Label>
-                <Input  className="width-input" type="text"   readOnly="readonly" onSelect={this.productClave}  placeholder={productClave}/>  
+           
+                
 
              </FormGroup>
             <FormGroup >

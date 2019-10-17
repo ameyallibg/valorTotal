@@ -1,11 +1,15 @@
 import React from 'react';
-import { Table, Input } from 'reactstrap';
+import { Table, Input , Button} from 'reactstrap';
 
 
-const ListaOrdenes = (props) => {
+
+
+class  ListaOrdenes extends React.Component {
+  render () {
+    const{items} =this.context
   return (
       <div>
-          <Table>
+                  <Table>
               <thead>
                   <tr>
                   <th>Filtrar por:</th>
@@ -30,7 +34,8 @@ const ListaOrdenes = (props) => {
             </Input>
           </th>
           <th>
-          <Input type="date">Fecha</Input>
+          <Input type="date">Fecha
+            </Input>
           </th>
           <th>
              <Input type="select">
@@ -43,6 +48,11 @@ const ListaOrdenes = (props) => {
 
 
           </Table>
+       
+            
+            
+           
+
     <Table>
       <thead>
         <tr>
@@ -55,28 +65,30 @@ const ListaOrdenes = (props) => {
         </tr>
       </thead>
       <tbody>
+      {items.map((item , key)=>(
+            
+            
+            
+     
         <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <Button>Ver</Button>
+          
+          <td>clave</td>
+          <td>{item.vendedor}</td>
+          <td>{item.uge}</td>
+          <td>{item.fecha}</td>
+          <td>{item.estatus}</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        
+     
+        ))
+                }
       </tbody>
+      
     </Table>
+  
     </div>
   );
 }
-
+}
 export default ListaOrdenes;
