@@ -2,13 +2,14 @@ import firebase from 'firebase/app';
 import '@firebase/firestore'
 
 firebase.initializeApp({
-  apiKey: "AIzaSyByma4rfpmOg7TiGFq-RlSAiMNwXnw5_iU",
-  authDomain: "ordentrabajo-989c8.firebaseapp.com",
-  databaseURL: "https://ordentrabajo-989c8.firebaseio.com",
-  projectId: "ordentrabajo-989c8",
-  storageBucket: "ordentrabajo-989c8.appspot.com",
-  messagingSenderId: "389115284614",
-  appId: "1:389115284614:web:c3ff445adefbb9d4141507"
+  apiKey: "AIzaSyCIakIiq4sVGlzXdSaa6rksCDJgiqlnq38",
+  authDomain: "anepsaordentrabajo.firebaseapp.com",
+  databaseURL: "https://anepsaordentrabajo.firebaseio.com",
+  projectId: "anepsaordentrabajo",
+  storageBucket: "anepsaordentrabajo.appspot.com",
+  messagingSenderId: "385626876617",
+  appId: "1:385626876617:web:8f530a5f73c974fce9fb18",
+  measurementId: "G-J77YSXRSZJ"
   });
   const db = firebase.firestore();
   db.settings({})

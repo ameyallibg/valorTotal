@@ -73,10 +73,10 @@ class  ListaOrdenes extends React.Component {
         <tr>
           <Button>Ver</Button>
           
-          <td>clave</td>
+          <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
-          <td>{item.fecha}</td>
+          <td>{item.dateNew}</td>
           <td>{item.estatus}</td>
         </tr>
         

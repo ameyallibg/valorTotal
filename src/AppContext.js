@@ -51,28 +51,22 @@ export const AppContext = React.createContext()
         }
         
        
-            const uge =  this.state.uge ;
-            console.log(this.state.uge)
-            const ugeClave = uge.substr(0,3).toUpperCase(); 
-            const date = this.state.dateNew;
-            const dateClave = date.substr(2,5).replace("-","");   
-        
-                this.setState({
-                    productClave: dateClave  + ugeClave 
-                })
+            
+            const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
+            const dateClave = this.state.dateNew.substr(2,5).replace("-","");     
+            const claveUnica = dateClave + ugeClave 
 
-                console.log(this.state.productClave)
            
 
-                document.getElementById("formClear").reset();
-    
+          document.getElementById("formClear").reset();
+          
           db.collection("orden").add({
           
             vendedor: this.state.vendedor,
             uge: this.state.uge,
             dateNew: this.state.dateNew,
             estatus: this.state.estatus,
-            productClave: this.state.productClave,
+            productClave: claveUnica,
           
          })
 
@@ -88,26 +82,32 @@ export const AppContext = React.createContext()
         })
     }
 
-    componentWillMount() {
+    componentDidMount() {
+
+       db.collection("orden").onSnapshot(this.obtenerBD)
+      }
+
+      obtenerBD=()=>{
         db.collection("orden")
           .get()
           .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
-            console.log(data);
+  
             this.setState({ items: data });
           }, console.log(this.state.items));
       }
 
 
-      componentWillUpdate(){
-        db.collection("orden")
-        .get()
-        .then(querySnapshot => {
-          const data = querySnapshot.docs.map(doc => doc.data());
-          
-          this.setState({ items: data });
-        });
-    }
+      
+    //   componentDidUpdate(){
+    //     db.collection("orden")
+    //     .get()
+    //     .then(querySnapshot => {
+    //       const data = querySnapshot.docs.map(doc => doc.data());
+    //       console.log(data)
+    //       this.setState({ items: data });
+    //     });
+    // }
  
 
     
