@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import db from "./Fire.js";
 
+
 export const AppContext = React.createContext()
 
  export class AppContextProvider extends Component {
@@ -13,14 +14,24 @@ export const AppContext = React.createContext()
             estatus:"",
             productClave:"",
             dateNew: new Date().toLocaleString(),
-            items:[] 
+            items:[] ,
+            newcontador: 0,
+            mes: [],
+            getDate:[],
+            consulta:[],
+            buscador:""
+            
            
         }
+    this.onClickItem = this.onClickItem.bind(this)
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeDate= this.handleChangeDate.bind(this)
+    this.handleChangeFound = this.handleChangeFound.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
    
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+  
     }
     //Funcion para cuando aparece el modal
     openModal() {
@@ -40,6 +51,62 @@ export const AppContext = React.createContext()
         
         
     } 
+
+    handleChangeFound= (e)=>{
+        
+      const handle = e.target.value
+      
+      console.log(handle)
+      console.log(this.state.buscador)
+      if(handle === ""){
+       
+        db.collection("orden").onSnapshot(this.obtenerBD)
+     
+        }else {
+          db.collection("orden").where("productClave", "==", handle )
+          .get()
+          .then(querySnapshot => {
+              const data = querySnapshot.docs.map(doc => doc.data());
+                  
+                  this.setState({
+                    items:data
+    
+                  })
+                  
+                  
+              });
+        }
+      
+      
+  } 
+  handleChangeDate = (e) =>{
+
+    const handle = e.target.value
+      
+    console.log(handle)
+    
+    if(handle === ""){
+     
+      db.collection("orden").onSnapshot(this.obtenerBD)
+   
+      }else {
+        db.collection("orden").where("dateNew", "==", handle )
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  items:data
+  
+                })
+                
+                
+            });
+      }
+    
+  
+
+  }
     
 
     //Validacion del formulario
@@ -50,68 +117,205 @@ export const AppContext = React.createContext()
             return
         }
         
-       
+            
+            
             
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
-            const dateClave = this.state.dateNew.substr(2,5).replace("-","");     
-            const claveUnica = dateClave + ugeClave 
+            const dateClave = this.state.dateNew.substr(2,5).replace("-","");  
+            const newDate = this.state.dateNew.slice(5, 7)
+            console.log(this.state.mes)
+            console.log(newDate)
+            console.log(this.state.getDate)
 
            
+           if(newDate ===
+             this.state.mes){
+              
+              let contador = this.state.getDate +1 ;
 
-          document.getElementById("formClear").reset();
+           
+                   
+              if(contador < 100 && contador < 10){ 
+                const claveUnica = dateClave + ugeClave + '00'+ contador
           
-          db.collection("orden").add({
-          
-            vendedor: this.state.vendedor,
-            uge: this.state.uge,
-            dateNew: this.state.dateNew,
-            estatus: this.state.estatus,
-            productClave: claveUnica,
-          
-         })
+            
+                document.getElementById("formClear").reset();
 
-        
-        
-        this.setState({
-           vendedor:"",
-           uge:"",
-           fecha:"",
-           estatus:"",
-           productClave:"",
+               
+                
+                db.collection("orden").add({
+                
+                  vendedor: this.state.vendedor,
+                  uge: this.state.uge,
+                  dateNew: this.state.dateNew,
+                  estatus: this.state.estatus,
+                  productClave: claveUnica,
+                  contador: contador,
+                  mes:newDate,
+                
+               })
 
-        })
+              
+      
+              
+              
+              this.setState({
+                 vendedor:"",
+                 uge:"",
+                 fecha:"",
+                 estatus:"",
+                 productClave:"",
+                 newcontador: contador,
+      
+              }, () => {console.log(this.state.mes)})
+              } else if(contador < 100 && contador > 10){
+                const claveUnica = dateClave + ugeClave +  '0'+contador
+          
+            
+                document.getElementById("formClear").reset();
+                
+                db.collection("orden").add({
+                
+                  vendedor: this.state.vendedor,
+                  uge: this.state.uge,
+                  dateNew: this.state.dateNew,
+                  estatus: this.state.estatus,
+                  productClave: claveUnica,
+                  date: this.state.dateNew,
+                
+               })
+      
+              
+              
+              this.setState({
+                 vendedor:"",
+                 uge:"",
+                 fecha:"",
+                 estatus:"",
+                 productClave:"",
+      
+              })
+              } else { 
+                const claveUnica = dateClave + ugeClave + contador
+          
+            
+                document.getElementById("formClear").reset();
+                
+                db.collection("orden").add({
+                
+                  vendedor: this.state.vendedor,
+                  uge: this.state.uge,
+                  dateNew: this.state.dateNew,
+                  estatus: this.state.estatus,
+                  productClave: claveUnica,
+                  
+                
+               })
+      
+              
+              
+              this.setState({
+                 vendedor:"",
+                 uge:"",
+                 fecha:"",
+                 estatus:"",
+                 productClave:"",
+      
+              })
+              }
+                
+   
     }
+   else {
+    
+
+    const contador = 1;
+
+
+      const claveUnica = dateClave + ugeClave + '00'+ contador
+
+  
+      document.getElementById("formClear").reset();
+
+     
+      
+      db.collection("orden").add({
+      
+        vendedor: this.state.vendedor,
+        uge: this.state.uge,
+        dateNew: this.state.dateNew,
+        estatus: this.state.estatus,
+        productClave: claveUnica,
+        contador: contador,
+        mes:newDate,
+      
+     })
+
+    
+
+    
+    
+    this.setState({
+       vendedor:"",
+       uge:"",
+       fecha:"",
+       estatus:"",
+       productClave:"",
+       getDate: contador,
+
+    }, () => {console.log(this.state.mes)})
+  }
+
+  }
 
     componentDidMount() {
 
        db.collection("orden").onSnapshot(this.obtenerBD)
+       
       }
 
       obtenerBD=()=>{
-        db.collection("orden")
+        db.collection("orden").orderBy("dateNew", "desc")
           .get()
           .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
-  
+            console.log(data)
             this.setState({ items: data });
           }, console.log(this.state.items));
+
+          db.collection("orden").orderBy("dateNew", "desc").limit(1)
+          .get().then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+           const newobj = data[0].contador
+           const newmes = data[0].mes
+
+            
+  
+            this.setState({ getDate: newobj, mes:newmes })
+          })
       }
 
 
+    
+    onClickItem(e){
       
-    //   componentDidUpdate(){
-    //     db.collection("orden")
-    //     .get()
-    //     .then(querySnapshot => {
-    //       const data = querySnapshot.docs.map(doc => doc.data());
-    //       console.log(data)
-    //       this.setState({ items: data });
-    //     });
-    // }
- 
+      
+     let newid=  e.target.id
+     
+      db.collection("orden").where("productClave", "==", newid)
+    .get()
+    .then(querySnapshot => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+            
+            console.log(data);
+            this.setState({ consulta: data , modalIsOpen:true})
+            
+        });
+    
+       
+          
 
-    
-    
+    }
     
     validate(){
         const state = this.state.uge
@@ -135,21 +339,27 @@ export const AppContext = React.createContext()
 
   
     render() {
-        const {newOrder, list, items} = this.state;
+        const {newOrder, list, items, consulta} = this.state;
       return (
         <AppContext.Provider
         value={{
         
-          
+          onClickItem: this.onClickItem,
           handleChange: this.handleChange,
+          handleChangeFound: this.handleChangeFound,
+          handleChangeDate: this.handleChangeDate,
           handleSubmit: this.handleSubmit ,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
           closeModal:this.closeModal,
+
+      
           newOrder,
           list,
-          items
+          items,
+          consulta,
+          
 
         }}
         >

@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { Table, Input , Button} from 'reactstrap';
 
 
@@ -6,7 +7,7 @@ import { Table, Input , Button} from 'reactstrap';
 
 class  ListaOrdenes extends React.Component {
   render () {
-    const{items} =this.context
+    const{items, onClickItem, closeModal, modalIsOpen, consulta, handleChangeFound , handleChangeDate}=this.context
   return (
       <div>
                   <Table>
@@ -15,10 +16,12 @@ class  ListaOrdenes extends React.Component {
                   <th>Filtrar por:</th>
                   </tr>
                 </thead>
+                <tbody>
           <tr>
           <th>
-            <Input type="text" placeholder="Clave">
+            <Input type="text" name="buscador" placeholder="Clave" onChange={handleChangeFound} >
             </Input>
+            
           </th>
           <th>
             <Input type="select">
@@ -34,7 +37,8 @@ class  ListaOrdenes extends React.Component {
             </Input>
           </th>
           <th>
-          <Input type="date">Fecha
+          <Input type="date" onChange={handleChangeDate} >
+            Fecha
             </Input>
           </th>
           <th>
@@ -45,7 +49,7 @@ class  ListaOrdenes extends React.Component {
             </Input>
           </th>
         </tr>
-
+        </tbody>
 
           </Table>
        
@@ -65,13 +69,12 @@ class  ListaOrdenes extends React.Component {
         </tr>
       </thead>
       <tbody>
-      {items.map((item , key)=>(
-            
+      {items.map((item, index) =>(
             
             
      
-        <tr>
-          <Button>Ver</Button>
+        <tr key={index}>
+          <td><Button id={item.productClave}  onClick={onClickItem}>Ver</Button></td>
           
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
@@ -80,15 +83,48 @@ class  ListaOrdenes extends React.Component {
           <td>{item.estatus}</td>
         </tr>
         
+        
      
         ))
                 }
       </tbody>
+      <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          className="modal-inner"
+          > 
+          <div>
+          <h5 className="text-danger text-center">Orden Creada</h5>
+         
+          
+          {consulta.map((item , index)=>(
+            <div key={index}>
+            <h6  className="text-danger text center">{item.productClave}</h6>
+            </div>
+            
+             
+              
+             
+         
+         
+           
+            
+              ))}
+                <hr/>   
+                <Button onClick={closeModal} >Cerrar</Button>
+               
+         </div>
+         
+         </Modal>
       
     </Table>
+    
   
     </div>
   );
 }
 }
+Modal.setAppElement('body');
+
+
 export default ListaOrdenes;

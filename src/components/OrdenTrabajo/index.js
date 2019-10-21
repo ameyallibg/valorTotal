@@ -406,4 +406,5 @@ class  OrdenTrabajo extends React.Component {
 
     }
 }
+Modal.setAppElement('body');
 export default OrdenTrabajo;
