@@ -37,6 +37,18 @@
     background-color: white;
 
 }
+
+.modal-inner-lista{
+    margin-left: 16.6%;
+    margin-top:30%;
+    width: 66%;
+    border: solid;
+    border-color: #80808054;
+    border-radius: 6px;
+    padding: 2%;
+    background-color: white;
+    
+}
 .text-align-left{
     text-align: left
 }
@@ -53,6 +65,11 @@
 }
 .space-between:hover{
     color:white
+}
+.form-style{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 69vh;
 }
 
 
@@ -74,9 +91,15 @@
         flex-direction: row;
     }
     .modal-inner{
-        margin-left: 33%;
+        margin-left:33%;
         margin-top:10%;
         width: 33%;
+    }
+
+    .modal-inner-lista{
+        margin-top:2%;
+        width: 66%;
+
     }
     
     .form-group-style{

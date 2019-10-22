@@ -28,7 +28,8 @@ export const AppContext = React.createContext()
     this.handleChangeDate= this.handleChangeDate.bind(this)
     this.handleChangeFound = this.handleChangeFound.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-   
+    this.deleteFilter = this.deleteFilter.bind(this)
+   this.handleChangeSelect = this.handleChangeSelect.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   
@@ -97,6 +98,29 @@ export const AppContext = React.createContext()
                 
                 this.setState({
                   items:data
+                })         
+            });
+      }
+  }
+
+  handleChangeSelect = (e) =>{
+
+    const handle = e.target.value
+      
+    console.log(handle)
+    
+    if(handle === "estatus"){
+     
+      db.collection("orden").onSnapshot(this.obtenerBD)
+   
+      }else {
+        db.collection("orden").where("estatus", "==", handle )
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  items:data
   
                 })
                 
@@ -107,6 +131,7 @@ export const AppContext = React.createContext()
   
 
   }
+    
     
 
     //Validacion del formulario
@@ -316,6 +341,15 @@ export const AppContext = React.createContext()
           
 
     }
+
+    deleteFilter() {
+      document.getElementsByName("estatus")[0].value  = "estatus";
+      document.getElementsByName("buscador")[0].value = "";
+      document.getElementsByName("fechaBuscador")[0].value = ""
+      db.collection("orden").onSnapshot(this.obtenerBD)
+
+    
+    }
     
     validate(){
         const state = this.state.uge
@@ -348,6 +382,8 @@ export const AppContext = React.createContext()
           handleChange: this.handleChange,
           handleChangeFound: this.handleChangeFound,
           handleChangeDate: this.handleChangeDate,
+          handleChangeSelect: this.handleChangeSelect,
+          deleteFilter: this.deleteFilter,
           handleSubmit: this.handleSubmit ,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
