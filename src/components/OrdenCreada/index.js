@@ -1,160 +1,277 @@
 
-// import React from 'react';
-
-// import {  Form, FormGroup, Label, Input, Col} from 'reactstrap';
-
+import React from 'react';
+import Modal from 'react-modal';
 
 
+import {Button,   Form, FormGroup, Label, Input, Col} from 'reactstrap';
 
-// class OrdenCreada extends React.Component {
-//     render() {
-//         const{ consulta} = this.context
-//         return (
-//             <div className="div-form">
-//             <h3 className="text-align-items title-style">.</h3>
-//         <Form  className="center-box style-form" >
-//         <h5 className="ot-color ot-center">ORDEN DE TRABAJO CREADA</h5>
-        
-       
-//             <FormGroup  >
-//             <FormGroup row> <Label  sm={2}> UGE</Label>
-//             <p>{consulta.productClave}</p>
-//             <Col sm={10}><Input className="width-input" type="text" name="uge" /> </Col>
-//             </FormGroup>
-                 
-                 
-//                 <Label  >Vendedor Ejecutivo  </Label>
-//                 <Input  type="text" name="vendedor"   />
-               
-//                  <Label  >Fecha OT </Label>
-//                  <Input className="width-input" name="dateNew"   type="text"/>
 
-//                 <Label >Clave del proyecto </Label>
-//                 <Input  className="width-input" type="text"   /> 
-                
 
-//              </FormGroup>
-//             <FormGroup >
-//                 <Label >Copia para </Label>
-//                 <Input className="width-input" type="text" name="copia"   />
-                   
-               
-//             </FormGroup>
-//         <FormGroup >
-//             <h6 className="ot-color label-input">1. TIPO DE OFERTA </h6>
-//             <Input className="width-input" type="text" name="oferta" />
-            
-//             <h6 className="ot-color label-input">1.1 CEDIDO DE  </h6>
-//             <Input className="width-input" type="text" name="cedido"   />
+
+class OrdenCreada extends React.Component {
+    render() {
+        const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus}=this.context
+ 
+        // const{ list} = this.context
+        return (
+            <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            className="modal-inner-lista"
+            > 
+            <div>
+            <h5 className="text-danger text-center">Orden Creada</h5>
            
-//             <Label className="ot-color label-input">2. TIPO DE PROYECTO   </Label>
-//             <Input className="width-input" type="text" name="proyecto" >
-//             <option value="">Selecciona</option>
-//             <option value="civil">.</option>
-//             <option value="direccion">.</option>
-//             </Input>
-           
-//             <Label className="ot-color label-input">3. TIPO DE CLIENTE </Label>
-
-//             <Input className="width-input" type="text" name="tipoCliente"   >
-//             <option value="">Selecciona</option>
-//             <option value="civil">.</option>
-//             <option value="direccion">.</option>
-//             </Input>
             
-//         </FormGroup> 
-//             <FormGroup >
-                
-//                 <h6 className="ot-color">4. DATOS DEL CLIENTE</h6>
-    
-//                 <Label>Nombre </Label>
-//                     <Input  className="form-size" type="text" name="nombreCliente"  />  
-//                 <Label >RFC </Label>
-//                     <Input className="width-input" type="text" name="rfcCliente"  /> 
-                
-//                 <Label >Dirección  </Label><Input  type="text" name="direccionCliente"  /> 
-//                 <Label >Deleg/Municipio  </Label><Input  type="text" name="delegacionCliente"    className="width-input"   /> 
-//                 <Label >Ciudad/EDO </Label><Input  type="text" name="EDOCliente"  className="width-input"   />
-//                 <Label >Atención </Label><Input  type="text" name="atencion"   /> 
-//                 <Label >Teléfono </Label><Input  className="width-input"  type="text" name="telCliente"  /> 
-//                 <Label >Exten </Label><Input type="text"  className="width-input" name="extTel"  /> 
-//                 <Label >Correo electronico </Label><Input  className="width-input" type="email" name="emailCliente"  /> 
-//             </FormGroup><br/>
-//             <FormGroup>
-//                 <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
-//                 <Label >Nombre Solicitante </Label><Input  type="text" name="nombreSol"  /> 
-//                 <Label >RFC </Label><Input className="width-input" type="text" name="rfcSol"   /> 
-//                 <Label >Dirección </Label><Input  type="text" name="direccionSol" /> 
-//                 <Label >Deleg/Municipio</Label> <Input className="width-input" type="text" name="delegacionSol" /> 
-//                 <Label >Ciudad/EDO </Label><Input className="width-input" type="text" name="EDOSol" /> 
-//                 <Label >Teléfono </Label><Input className="width-input" type="text" name="telSol" /> 
-//                 <Label >Exten</Label><Input className="width-input" type="text" name="extenSol" /> 
-//                 <Label >Correo electronico </Label><Input className="width-input" type="email" name="emailSol" /> 
-//             </FormGroup><br/>
-//             <FormGroup>
-//             <h6 className="ot-color">6. OBJETIVO DEL AVALÚO </h6>
-//                 <Input  type="text" name="objetivo" /> 
-//                 <Label >Otro Objetivo </Label><Input  type="text" name="otroObj"  /> 
-//             </FormGroup>
-
-//             <FormGroup>
-//             <h6 className="ot-color">7. PROPÓSITO DEL AVALÚO  </h6>
-//                 <Input  type="text" name="proposito"  /> 
-//                 <Label >Otro Propósito</Label><Input type="text" name="otroProp"   /> 
-//             </FormGroup><br/>
-
-//             <FormGroup>
-//                 <h6 className="ot-color">8. INSPECCIÓN FÍSICA</h6>
-//                 <Label >Presentarse con </Label> <Input  type="text" name="presentarse"    /> 
-//                 <Label >Visitador</Label> <Input  type="text" name="visitador"  /> 
-//                 <Label >Fecha  </Label>
-//                 <Input type="date"/>
-//                 <Label >Teléfono</Label> <Input className="width-input" type="text" name="telInsp"/> 
-//                 <Label >Exten </Label><Input className="width-input" type="text" name="extenInsp" /> 
-//                 <Label >Correo </Label><Input className="width-input" type="email" name="emailInsp"  /> 
-//                 <Label >Direccion  </Label><Input  type="text" name="dirInsp" /> 
-//                 <Label >Observaciones</Label><Input type="text" name="observaciones"  /> 
-//             </FormGroup><br/>
-
-//             <FormGroup>
-//                 <h6 className="ot-color">9. BIENES A VALUAR</h6>
-//                 <Label ></Label><Input  type="text" name="bienes"  /> 
-//                 <Label >Otros Bienes </Label><Input type="text" name="otroBien"   /> 
-//             </FormGroup><br/>
-//             <FormGroup>
-//             <h6 className="ot-color">10. FECHAS </h6>
-//                 <Label >Inicio de Proyecto </Label>
-//                 <div>
-//                 <Input type="date"/>
-//                 </div>
-//                 <Label >Entrega de Proyecto</Label>
-//                 <div>
-//                 <Input type="date"/>
-//                 </div>
+            {consulta.map((item , index)=>(
+              <div key={index}>
+                <Form className="form-style">
+                  <FormGroup row>
+                    <Col sm={4}>
+              <Label> Clave: </Label>
+              <Input type="text" value={item.productClave} ></Input>
+              </Col>
+             <Col sm={8}>
+              <Label>Vendedor Ejecutivo:</Label>
+              <Input type="text" value={item.vendedor} ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> UGE: </Label> 
+              <Input type="text" value={item.uge}></Input>
+              </Col>
+              <Col sm={2}>
+              <Label> FECHA OT: </Label> 
+              <Input type="text" value={item.dateNew}></Input>
+              </Col>
+              <Col sm={2}>
+              <Label> ESTATUS: </Label> 
+              <Input type="text" name="newestatus" value={newestatus} placeholder={item.estatus} onChange={handleUpdate}></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> COPIA PARA </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              </FormGroup>
+              <FormGroup  row>
+                  <Col sm={3}>
+              <Label className="ot-color label-input">1. TIPO DE OFERTA </Label>
+              
+                  <Input  type="text" />
+              </Col>
+             <Col sm={3}>
+                  <Label className="ot-color label-input">1.1 CEDIDO DE  </Label>
                   
-//             </FormGroup><br/>
-//             <FormGroup>
-//             <h6 className="ot-color">11. INFORMACIÓN PROPORCIONADA</h6>
-//             <Input  type="textarea" name="info"   /> 
-//             <Label >Otra Información</Label><Input  type="textarea" name="otraInfo"   /> 
-//             </FormGroup><br/>
-//             <FormGroup>
-//                 <Label className="ot-color">PRESUPUESTO</Label>
-//                 <Input className="width-input" type="text" name="presupuesto" /> 
-//                 <Label className="ot-color">MONTO VENDIDO </Label>
-//                 <Input className="width-input" type="text" name="montoVendido"   /> 
-//                 <Label className="ot-color">ELABORO </Label>
-//                 <Input className="width-input" type="text" name="elaboro"   /> 
-//                 <Label className="ot-color">ESTATUS </Label>
-//                 <Input className="width-input" type="text" name="estatus"   /> 
-//                 <Label className="ot-color">FACTURAR </Label>
-//                 <Input className="width-input" type="text" name="facturar"   /> 
-//             </FormGroup> 
-//         </Form>
-//         </div>
-//         )
-// }
-// }
+                  <Input  type="text"  />
+                 
+             </Col>
+             <Col sm={3}>
+              <Label   className="ot-color label-input">2. TIPO DE PROYECTO </Label>
+              
+                  <Input  type="text" />
+              
+              </Col>
+             <Col sm={3}>
+                  <Label  className="ot-color label-input">3. TIPO DE CLIENTE  </Label>
+                 
+                  <Input  type="text"  />
+                 
+                  
+             </Col>
+             <Col sm={12}>
+               <hr/>
+    
+             <h6 className="ot-color">4. DATOS DEL CLIENTE</h6>
+             </Col>
+             <Col sm={4}>
+              <Label> Nombre: </Label>
+              <Input type="text"  ></Input>
+              </Col>
+             <Col sm={8}>
+              <Label>Dirección:</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> Ciudad/EDO: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={8}>
+              <Label> Atención: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> Teléfono: </Label> 
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={2}>
+              <Label> Extension: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={6}>
+              <Label> Correo Electrónico: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={12}>
+              <hr/>
+             <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
+             </Col>
+             <Col sm={4}>
+              <Label> Nombre Solicitante: </Label>
+              <Input type="text"  ></Input>
+              </Col>
+             <Col sm={8}>
+              <Label>Dirección:</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> RFC </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> Deleg/Municipio: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> Ciudad/Estado </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label> Teléfono: </Label> 
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={2}>
+              <Label> Extension: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={6}>
+              <Label> Correo Electrónico: </Label> 
+              <Input type="text" ></Input>
+              </Col>
+              <Col sm={12}><hr/></Col>
+              
+           
+             <Col sm={6}>
+              <Label className="ot-color"> 6. OBJETIVO DEL AVALÚO</Label>
+              <Input type="text"  ></Input>
+              </Col>
+             <Col sm={6}>
+              <Label className="ot-color">7. PROPOSITO DEL AVALÚO:</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={12}>
+              <hr/>
+             <h6 className="ot-color"> 8. INSPECCIÓN FÍSICA</h6>
+             </Col>
+             <Col sm={6}>
+              <Label>Presentarse con:</Label>
+              <Input type="text"  ></Input>
+              </Col>
+             <Col sm={6}>
+              <Label>Visitador</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={3}>
+              <Label>Fecha</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={3}>
+              <Label>Teléfono</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={2}>
+              <Label>Exten</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={4}>
+              <Label>Correo Electrónico</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={7}>
+              <Label>Dirección</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={5}>
+              <Label>Observaciones</Label>
+              <Input type="text"></Input>
+              </Col>
+             
+              <Col sm={12}>
+              <hr/>
+             
+             </Col>
+             <Col sm={6}>
+              <Label className="ot-color"> 9. BIENES A VALUAR</Label>
+              <Col sm={12}>
+              <Label>Bienes</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              </Col>
+             <Col sm={6}>
+              <Label className="ot-color">10. FECHAS</Label>
+              <FormGroup row >
+                <Col sm={6}>
+                <Label>Inicio</Label>
+              <Input type="text"></Input>
+              </Col>
+              <Col sm={6}>
+                <Label>Entrega</Label>
+              <Input type="text"></Input>
+              </Col>
+              </FormGroup>
+              </Col>
+              <Col sm={12}>
+              <hr/>
+             <h6 className="ot-color"> 11. INFORMACIÓN PROPORCIONADA</h6>
+             
+              <Input type="text.area"  ></Input>
+              </Col>
+              <Col sm={12}>
+              <hr/>
+             
+             </Col>
+             <Col sm={4}>
+              <Label className="ot-color">PRESUPUESTO</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              <Col sm={4}>
+              <Label className="ot-color">MONTO VENDIDO</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              <Col sm={2}>
+              <Label className="ot-color">ELABORO</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              <Col sm={2}>
+              <Label className="ot-color">FACTURAR</Label>
+              <Input type="text"  ></Input>
+              </Col>
+              
+              
+              
+              </FormGroup>
+              </Form>  
+  
+              </div>
+              
+               
+                
+               
+           
+           
+             
+              
+                ))}
+                  <hr/>   
+                  <Button onClick={closeModal} >Cerrar</Button>
+                 
+           </div>
+           
+           </Modal>
+        
+            
+        )
+}
+}
+Modal.setAppElement('body');
 
 
-// export default OrdenCreada
+export default OrdenCreada

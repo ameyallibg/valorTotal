@@ -32,7 +32,13 @@ class  OrdenTrabajo extends React.Component {
             <FormGroup>
                 <Label sm={12}  >Vendedor Ejecutivo <span className="text-danger">*</span> </Label>
                 <Col sm={9}>
-                    <Input  type="text" name="vendedor" value={vendedor} onChange={handleChange} />
+                    <Input  type="select" name="vendedor" value={vendedor} onChange={handleChange} >
+                    <option value="">Selecciona</option>
+                        <option value="Ameyalli Brito González">Ame</option>
+                        <option value="Yozebeth Brito González">Yoz</option>
+                     
+                        
+                        </Input>
                 </Col>
             </FormGroup>
             <FormGroup> 
@@ -406,5 +412,4 @@ class  OrdenTrabajo extends React.Component {
 
     }
 }
-Modal.setAppElement('body');
 export default OrdenTrabajo;

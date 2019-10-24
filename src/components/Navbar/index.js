@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { NavLink } from "react-router-dom";
 import {
   Collapse,
@@ -11,21 +11,39 @@ import {
  
   } from 'reactstrap';
 
-const Navegador= (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  
+  class Navegador extends React.Component {
+    constructor(props) {
+      super(props);
+  
+      this.toggle = this.toggle.bind(this);
+      this.state = {
+        isOpen: false
+      };
+    }
+    toggle() {
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    }
+ render(){
+   const{handleLogout} = this.context
 
-
-  const toggle = () => setIsOpen(!isOpen);
+      
 
   return (
     <div>
       <Navbar color="white" light expand="md">
         <NavbarBrand href="/">Anepsa</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
              <Button color="link">  <NavLink  to="/">Home</NavLink></Button>
+            </NavItem>
+            <NavItem>
+         <Button onClick={handleLogout} className="log-out">Cerrar Sesión</Button>
+    
             </NavItem>
 
             <NavItem>
@@ -38,6 +56,7 @@ const Navegador= (props) => {
       </Navbar>
     </div>
   );
+}
 }
 
 export default Navegador;

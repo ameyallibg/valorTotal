@@ -1,5 +1,10 @@
+
+  
 import React, { Component } from "react";
 import db from "./Fire.js";
+import firebase from 'firebase';
+
+
 
 
 export const AppContext = React.createContext()
@@ -19,7 +24,9 @@ export const AppContext = React.createContext()
             mes: [],
             getDate:[],
             consulta:[],
-            buscador:""
+            buscador:"",
+            newestatus:"",
+            getName:"",
             
            
         }
@@ -27,6 +34,7 @@ export const AppContext = React.createContext()
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDate= this.handleChangeDate.bind(this)
     this.handleChangeFound = this.handleChangeFound.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteFilter = this.deleteFilter.bind(this)
    this.handleChangeSelect = this.handleChangeSelect.bind(this);
@@ -52,6 +60,7 @@ export const AppContext = React.createContext()
         
         
     } 
+
 
     handleChangeFound= (e)=>{
         
@@ -131,7 +140,19 @@ export const AppContext = React.createContext()
   
 
   }
-    
+    handleUpdate=(e) =>{
+      
+      if(this.state.getName === this.state.vendedor ){
+        
+        this.setState({ 
+            [e.target.name]:e.target.value
+        })
+        console.log(this.state)
+        
+    }else {
+      console.log("no sirvo ")
+    }
+  }
     
 
     //Validacion del formulario
@@ -292,10 +313,33 @@ export const AppContext = React.createContext()
   }
 
   }
+  obtenerUser= ()=>{
+    const usuario = this.state.user
+
+    db.collection("usuarios").where("email","==",  usuario ).get().then(querySnapshot => {
+      const data = querySnapshot.docs.map(doc => doc.data());
+      
+      const getUser = data[0].name
+      console.log(getUser)
+      console.log(this.state)
+           
+
+            
+  
+            this.setState({ getName: getUser })
+          })
+   
+    
+  }
 
     componentDidMount() {
 
        db.collection("orden").onSnapshot(this.obtenerBD)
+       db.collection("usuarios").onSnapshot(this.obtenerUser)
+       const user =  firebase.auth().currentUser.email
+       this.setState({
+         user:user
+       }, () => console.log(this.state.user))
        
       }
 
@@ -389,6 +433,7 @@ export const AppContext = React.createContext()
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
           closeModal:this.closeModal,
+          handleUpdate:this.handleUpdate,
 
       
           newOrder,
