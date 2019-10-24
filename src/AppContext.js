@@ -321,13 +321,14 @@ export const AppContext = React.createContext()
       
       const getUser = data[0].name
       console.log(getUser)
-      console.log(this.state)
+      
+      
            
 
             
   
             this.setState({ getName: getUser })
-          })
+          }) 
    
     
   }
@@ -339,7 +340,7 @@ export const AppContext = React.createContext()
        const user =  firebase.auth().currentUser.email
        this.setState({
          user:user
-       }, () => console.log(this.state.user))
+       })
        
       }
 
@@ -370,8 +371,9 @@ export const AppContext = React.createContext()
       
       
      let newid=  e.target.id
+     let newVendedor = e.target.name
      
-      db.collection("orden").where("productClave", "==", newid)
+      db.collection("orden").where("productClave", "==", newid).where("vendedor", "==", )
     .get()
     .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());

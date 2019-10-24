@@ -63,11 +63,8 @@ handleRender() {
   if(this.state.user) {
     return ( 
       
-      <AppContextProvider value={{
-        
-        handleLogout: this.handleLogout }}
-        >
-          {this.props.children}
+      <AppContextProvider  >
+         
           <button onClick={this.handleLogout} className="log-out">Cerrar Sesión</button>
         <Menu/>        
         

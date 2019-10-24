@@ -95,7 +95,7 @@ class  ListaOrdenes extends React.Component {
             
      
         <tr key={index}>
-          <td><Button id={item.productClave}  onClick={onClickItem}>Ver</Button></td>
+          <td><Button id={item.productClave} name={item.vendedor} onClick={onClickItem}>Ver</Button></td>
           
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>

@@ -8,12 +8,17 @@ import {Button,   Form, FormGroup, Label, Input, Col} from 'reactstrap';
 
 
 
+
 class OrdenCreada extends React.Component {
+
     render() {
         const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus}=this.context
  
-        // const{ list} = this.context
+        // const{ list} = this.context}
+        
+        
         return (
+        
             <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -269,8 +274,8 @@ class OrdenCreada extends React.Component {
         
             
         )
-}
-}
+}}
+
 Modal.setAppElement('body');
 
 
