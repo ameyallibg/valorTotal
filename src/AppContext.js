@@ -38,6 +38,7 @@ export const AppContext = React.createContext()
     this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteFilter = this.deleteFilter.bind(this)
    this.handleChangeSelect = this.handleChangeSelect.bind(this);
+   this.handleLogout = this.handleLogout.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   
@@ -312,6 +313,13 @@ export const AppContext = React.createContext()
     }, () => {console.log(this.state.mes)})
   }
 
+  
+  }
+
+  handleLogout(){
+    firebase.auth().signOut()
+    .then(result => console.log(`${result.user.email} ha salido`))
+    .catch(error => console.log(`Error ${error.code}: ${error.message}`));
   }
   obtenerUser= ()=>{
     const usuario = this.state.user
@@ -419,7 +427,7 @@ export const AppContext = React.createContext()
 
   
     render() {
-        const {newOrder, list, items, consulta} = this.state;
+        const {newOrder, list, items, consulta, getName, user} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -431,6 +439,7 @@ export const AppContext = React.createContext()
           handleChangeSelect: this.handleChangeSelect,
           deleteFilter: this.deleteFilter,
           handleSubmit: this.handleSubmit ,
+          handleLogout:this.handleLogout,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
@@ -442,6 +451,8 @@ export const AppContext = React.createContext()
           list,
           items,
           consulta,
+          getName,
+          user,
           
 
         }}

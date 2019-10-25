@@ -23,33 +23,50 @@ class  OrdenTrabajo extends React.Component {
             <h3 className="text-align-items title-style">.</h3>
             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmit}>
                 <h5 className="ot-color ot-center">ORDEN DE TRABAJO</h5>
-            <FormGroup>
+                <br/>
+                <fieldset className="fieldset">
+            <FormGroup  row>
+                
+            <Col sm={3}>
                  <Label sm={12} >UGE <span className="text-danger">*</span>   </Label>
-                 <Col sm={5}>
-                     <Input type="text" name="uge" value={uge} onChange={handleChange}/>
+                 <Col >
+                     <Input type="select" name="uge" value={uge} onChange={handleChange}>
+                        <option value="">Selecciona</option>
+                         <option value="CIVIL">CIVIL</option>
+                         <option value="FINANCIERA">FINANCIERA</option>
+                         <option value="INDUSTRIAL">INDUSTRIAL</option>
+                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
+                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
+                    </Input>
                  </Col>
-            </FormGroup>
-            <FormGroup>
+                 </Col>
+         
+                <Col sm={3}>
                 <Label sm={12}  >Vendedor Ejecutivo <span className="text-danger">*</span> </Label>
-                <Col sm={9}>
+                <Col >
                     <Input  type="select" name="vendedor" value={vendedor} onChange={handleChange} >
                     <option value="">Selecciona</option>
                         <option value="Ameyalli Brito González">Ame</option>
                         <option value="Yozebeth Brito González">Yoz</option>
-                     
+                        <option value="Lazo Santiago Rubens">Lazo Santiago Rubens</option>
+                        <option value="Vicente Galicia Salazar">Vicente Galicia Salazar</option>
+                        <option value="America Jimenez Carlon">America Jimenez Carlon</option>
+                        <option value="Daniel Hurtado Sanchez">Daniel Hurtado Sanchez</option>
                         
                         </Input>
                 </Col>
-            </FormGroup>
-            <FormGroup> 
+                </Col>
+                <Col sm={3}>
                 <Label sm={12} >Fecha OT<span className="text-danger">*</span> </Label>
-                <Col sm={6}> 
+                <Col > 
                     <Input  name="dateNew" value={dateNew} onChange={handleChange} type="date"/>
-                </Col>   
-           </FormGroup>
-            <FormGroup >
+                </Col> 
+                </Col>  
+                <Col sm={3}>
                     <Label  sm={12}>Copia para <span className="text-danger">*</span> </Label>
-                <Col sm={6}>
+                <Col >
                     <Input  type="select" name="copia"  value={copia} onChange={handleChange}>
                         <option value="">Selecciona</option>
                         <option value="civil">Civil</option>
@@ -64,239 +81,320 @@ class  OrdenTrabajo extends React.Component {
                         <option value="civ-fin-ind">Civil-Finanzas-Industrial</option>
                     </Input>
                 </Col>
+                </Col>
+                
             </FormGroup>
-            <hr/>
+            </fieldset>
+            <Col><hr/></Col>
+            <fieldset className="fieldset">
             <FormGroup  row>
-                <Col sm={6}>
+            
+                <Col sm={3}>
             <Label  sm={12} className="ot-color label-input">1. TIPO DE OFERTA </Label>
             <Col >
-                <Input  type="text" name="oferta" value={oferta} onChange={handleChange} />
+                <Input  type="select" name="oferta" value={oferta} onChange={handleChange} >
+                <option value="">Selecciona</option>
+                <option value="PROPIO">PROPIO</option>
+                <option value="CEDIDO">CEDIDO</option>
+                <option value="MARKETING DIGITAL">MARKETING DIGITAL</option>
+                <option value="ASOCIADO">ASOCIADO</option>
+                
+                </Input>
             </Col>
             </Col>
-           <Col sm={6}>
+           <Col sm={3}>
                 <Label sm={12} className="ot-color label-input">1.1 CEDIDO DE  </Label>
                 <Col >
                 <Input  type="text" name="cedido" value={cedido} onChange={handleChange} />
                 </Col>
            </Col>
-            </FormGroup>  
-            <FormGroup row>
-                <Col sm={6}>
+           
+                <Col sm={3}>
                 <Label sm={12} className="ot-color label-input">2. TIPO DE PROYECTO <span className="text-danger">*</span>  </Label>
                 <Col >
                 <Input  type="select" name="proyecto" value={proyecto} onChange={handleChange} >
-                    <option value="">Selecciona</option>
-                    <option value="civil">.</option>
-                    <option value="direccion">.</option>
+                <option value="">Selecciona</option>
+                    <option value="MICRO">MICRO</option>
+                    <option value="MECRO">MECRO</option>
+                    <option value="MACRO">MACRO</option>
                 </Input>
                 </Col>
                 </Col>
-                <Col sm={6}>
+                <Col sm={3}>
                 <Label sm={12} className="ot-color label-input">3. TIPO DE CLIENTE <span className="text-danger">*</span> </Label>
                 <Col >
                     <Input   type="select" name="tipoCliente" value={tipoCliente} onChange={handleChange} >
-                        <option value="">Selecciona</option>
-                        <option value="civil">.</option>
-                        <option value="direccion">.</option>
+                    <option value="">Selecciona</option>
+                        <option value="NUEVO">NUEVO</option>
+                        <option value="CONTINUO">CONTINUO</option>
+                        <option value="PROSPECTO">PROSPECTO</option>
                     </Input>
                 </Col>               
                 </Col>
             </FormGroup>
+            </fieldset>
             <hr/>
+            <fieldset className="fieldset">
+            <legend className="ot-color">4. DATOS DEL CLIENTE</legend>
             <FormGroup >
-            <h6 className="ot-color">4. DATOS DEL CLIENTE</h6>
-            <FormGroup>
+                
+            <FormGroup row>
+            <Col sm={7}>
+           
                 <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
-                <Col sm={10}>
+                <Col >
                     <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
                 </Col> 
-            </FormGroup>
-            <FormGroup>
+                </Col>
+            <Col sm={5}>
+          
                 <Label sm={12} >RFC </Label>
-                <Col sm={6}>
+                <Col >
                     <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
                 </Col>
+                </Col> 
                 
             </FormGroup>
+           
                 <Label sm={12} >Dirección  </Label>
                 <Col sm={12}>
                 <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
                 </Col>
             </FormGroup>
             <FormGroup row>  
-                <Col sm={6}>
+                <Col sm={4}>
                 <Label sm={12}>Deleg/Municipio  </Label>
                 <Col>
                 <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
                 </Col>
                  </Col> 
-                 <Col sm={6}>
+                 <Col sm={4}>
                
                  <Label  sm={12}>Ciudad/EDO </Label>
                 <Col>
                  <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
                     </Col>
                  </Col>
-            </FormGroup>
-         
-            <FormGroup>
-                <Label  sm={12}>Atención </Label>
-                <Col sm={6}>
+                 <Col sm={4}>
+                 <Label  sm={12}>Atención </Label>
+                <Col sm={12}>
                     <Input  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
+                 </Col>
             </FormGroup>
            
             <FormGroup row>  
-                <Col sm={8}>
+                <Col sm={4}>
                 <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
                 <Col>
                 <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
                 </Col>
                  </Col> 
-                 <Col sm={4}>
+                 <Col sm={2}>
                 <Label sm={12}>Exten </Label>
                 <Col>
                     <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
                     </Col>
                  </Col>
-            </FormGroup>
-            <FormGroup>
-                <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
-                <Col sm={6} >
+                 <Col sm={6}>
+                 <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
+                <Col>
                 <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
                 </Col>
-               
-            </FormGroup>  
-           
-           
-                <h6 className="ot-color">5. SOLICITANTE DEL AVALÚO</h6>
-            <FormGroup>
-                <Label sm={12}>Nombre Solicitante <span className="text-danger">*</span> </Label>
-                <Col sm={10}>
-                <Input  type="text" name="nombreSol" value={nombreSol} onChange={handleChange}  placeholder={nombreCliente}/> 
                 </Col>
             </FormGroup>
-            <FormGroup>
-                <Label sm={12}> RFC </Label>
-                <Col sm={6}>
-                    <Input  type="text" name="rfcSol" value={rfcSol} onChange={handleChange} placeholder={rfcCliente} />
-                </Col> 
-            </FormGroup>
-            <FormGroup>
-                <Label sm={12}> Dirección </Label>
-                <Col sm={12}>
-                <Input  type="text" name="direccionSol" value={direccionSol} onChange={handleChange} placeholder={direccionCliente} /> 
-                </Col>
-            </FormGroup>
-            <FormGroup row>
-                <Col sm={6}>
-                <Label sm={12}> Deleg/Municipio</Label> 
-                <Col>
-                <Input  type="text" name="delegacionSol" value={delegacionSol} onChange={handleChange} placeholder={delegacionCliente} /> 
-                </Col>
-                </Col>
-                <Col sm={6}>
-                <Label sm={12}> Ciudad/EDO </Label>
-                <Col>
-                <Input  type="text" name="EDOSol" value={EDOSol} onChange={handleChange} /> 
-                </Col>
-                </Col>
-            </FormGroup>
-            <FormGroup row>
-                <Col sm={8}>
-                <Label sm={12}>Teléfono <span className="text-danger">*</span> </Label>
-                <Col>
-                <Input  type="text" name="telSol" value={telSol} onChange={handleChange}  placeholder={telCliente}/> 
-                </Col>
-                </Col>
-                <Col sm={4}>
-                <Label sm={12}>Exten</Label>
-                <Col>
-                <Input  type="text" name="extenSol" value={extenSol} onChange={handleChange} placeholder={extTel} /> 
-                </Col>
-                </Col>
-            </FormGroup>
-            <FormGroup>
-                <Label sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
-                <Col sm={6}> 
-                <Input  type="email" name="emailSol" value={emailSol} onChange={handleChange} placeholder={emailCliente} /> 
-                </Col>
-            </FormGroup>
-            <FormGroup>
-            <Label sm={12}className="ot-color">6. OBJETIVO DEL AVALÚO <span className="text-danger">*</span> </Label>
-                <Col sm={6}>
+           </fieldset>
+           <hr/>
+           <fieldset className="fieldset">
+                <legend className="ot-color">5. SOLICITANTE DEL AVALÚO</legend>
+                <FormGroup >
                 
+                <FormGroup row>
+                <Col sm={7}>
+               
+                    <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
+                    <Col >
+                        <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
+                    </Col> 
+                    </Col>
+                <Col sm={5}>
+              
+                    <Label sm={12} >RFC </Label>
+                    <Col >
+                        <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
+                    </Col>
+                    </Col> 
+                    
+                </FormGroup>
+               
+                    <Label sm={12} >Dirección  </Label>
+                    <Col sm={12}>
+                    <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
+                    </Col>
+                </FormGroup>
+                <FormGroup row>  
+                    <Col sm={6}>
+                    <Label sm={12}>Deleg/Municipio  </Label>
+                    <Col>
+                    <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
+                    </Col>
+                     </Col> 
+                     <Col sm={6}>
+                   
+                     <Label  sm={12}>Ciudad/EDO </Label>
+                    <Col>
+                     <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
+                        </Col>
+                     </Col>
+
+                </FormGroup>
+               
+                <FormGroup row>  
+                    <Col sm={4}>
+                    <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
+                    <Col>
+                    <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
+                    </Col>
+                     </Col> 
+                     <Col sm={2}>
+                    <Label sm={12}>Exten </Label>
+                    <Col>
+                        <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
+                        </Col>
+                     </Col>
+                     <Col sm={6}>
+                     <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
+                    <Col>
+                    <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
+                    </Col>
+                    </Col>
+                </FormGroup>
+            </fieldset>
+            <hr/>
+            <fieldset className="fieldset">
+            <legend className="ot-color ">6. OBJETIVO DEL AVALÚO <span className="text-danger">*</span> </legend>
+             
+            <FormGroup row>
+              <Col sm={3}>
+              <Label sm={12}>Objetivo </Label>
+              <Col>
                 <Input  type="select" name="objetivo" value={objetivo} onChange={handleChange}>
-                    <option>Selecciona</option>
-                    <option>n</option>
-                    <option>n</option>
+                <option value="">Selecciona</option>
+                    <option value="AVALÚO BANCARIO">AVALÚO BANCARIO</option>
+                    <option value="AVALÚO CATASTRAL">AVALÚO CATASTRAL</option>
+                    <option value="AVALÚO COMERCIAL">AVALÚO COMERCIAL</option>
+                    <option value="AVALÚO INDUSTRIAL COMERCIAL">AVALÚO INDUSTRIAL COMERCIAL</option>
+                    <option value="AVALÚO INDUSTRIAL VALOR RAZONABLE">AVALÚO INDUSTRIAL VALOR RAZONABLE</option>
+                    <option value="AVALÚO INDUSTRIAL VRN">AVALÚO INDUSTRIAL VRN</option>
+                    <option value="AVALÚO SEGUROS">AVALÚO SEGUROS</option>
+                    <option value="AVALÚO SHF">AVALÚO SHF</option>
+                    <option value="CAF">CAF</option>
+                    <option value="CAPACITACIÓN">CAPACITACIÓN</option>
+                    <option value="C6">C6</option>
+                    <option value="C15">C15</option>
+                    <option value="INVENTARIO  ACTIVO FIJO">INVENTARIO  ACTIVO FIJO</option>
+                    <option value="INVENTARIO DE CIRCULANTE">INVENTARIO DE CIRCULANTE</option>
+                    <option value="MARCA">MARCA</option>
+                    <option value="NEGOCIO EN MARCHA">NEGOCIO EN MARCHA</option>
+                    <option value="NORMA INTERNACIONAL">NORMA INTERNACIONAL</option>
+                    <option value="NEGOCIACIÓN">NEGOCIACIÓN</option>
+                    <option value="SAAF">SAAF</option>
+                    <option value="PLACAS">PLACAS</option>
+                    <option value="OTRO OBJETIVO">OTRO OBJETIVO</option>
+
                 </Input> 
                 </Col>
-            </FormGroup>
-            <FormGroup>
+                </Col>
+                <Col sm={9}>
 
                 <Label sm={12}>Otro Objetivo </Label>
-                <Col sm={6}>
+                <Col >
                 <Input  type="text" name="otroObj" value={otroObj} onChange={handleChange} /> 
                 </Col>
+                </Col>
             </FormGroup>
-            <FormGroup>
-            <Label sm={12} className="ot-color">7. PROPÓSITO DEL AVALÚO <span className="text-danger">*</span>  </Label>
-                <Col sm={6}>
+            </fieldset>
+            <hr/>
+            <fieldset>
+            <legend className="ot-color">7. PROPÓSITO DEL AVALÚO <span className="text-danger">*</span>  </legend>
+             
+            <FormGroup row>
+               <Col sm={3}>
+                   <Label sm={12}> Propósito</Label>
+                   <Col>
                 <Input  type="select" name="proposito" value={proposito} onChange={handleChange} > 
-                <option>Selecciona</option>
-                <option>.</option>
-                <option>.</option>
-                <option>.</option>
+                
+                <option value="">Selecciona</option>
+                <option value="ASEGURAR EL INMUEBLE">ASEGURAR EL INMUEBLE</option>
+                <option value="CRÉDITO HIPOTECARIO">CRÉDITO HIPOTECARIO</option>
+                <option value="DACIÓN DE PAGO">DACIÓN DE PAGO</option>
+                <option value="ESCRITURACIÓN">ESCRITURACIÓN</option>
+                <option value="GARANTÍA FISCAL">GARANTÍA FISCAL</option>
+                <option value="INTESTADO">INTESTADO</option>
+                <option value="JUSTIPRECIACION DE RENTAS">JUSTIPRECIACION DE RENTAS</option>
+                <option value="POSTURA DE COMPRA-VENTA">POSTURA DE COMPRA-VENTA</option>
+                <option value="REMATE">REMATE</option>
+                <option value="SUCESIÓN TESTAMENTARIA">SUCESIÓN TESTAMENTARIA</option>
+                <option value="TRASLADO DE DOMINIO">TRASLADO DE DOMINIO</option>
+                <option value="TOMA DE DECISIONES INTERNAS">TOMA DE DECISIONES INTERNAS</option>
+                <option value="OTRO PROPÓSITO">OTRO PROPÓSITO</option>
+                
                 </Input>
                 </Col>
-            </FormGroup>
-            <FormGroup>       
+                </Col>
+            <Col sm={9}>       
                 <Label sm={12} >Otro Propósito</Label>
-                <Col sm={6}>
+                <Col >
                 <Input type="text" name="otroProp" value={otroProp} onChange={handleChange} /> 
                 </Col>
-            </FormGroup>
-            <h6 className="ot-color">8. INSPECCIÓN FÍSICA</h6>
-            <FormGroup>
-                
-                <Label sm={12} >Presentarse con <span className="text-danger">*</span> </Label>
-                <Col sm={10}>
-                <Input  type="text" name="presentarse" value={presentarse} onChange={handleChange}  placeholder={nombreCliente}/> 
                 </Col>
             </FormGroup>
-            <FormGroup>
+            </fieldset>
+            <hr/>
+            <fieldset className="fieldset">
+            <legend className="ot-color">8. INSPECCIÓN FÍSICA</legend>
+            <FormGroup row>
+                <Col sm={6}>
+                <Label sm={12} >Presentarse con <span className="text-danger">*</span> </Label>
+                <Col >
+                <Input  type="text" name="presentarse" value={presentarse} onChange={handleChange}  placeholder={nombreCliente}/> 
+                </Col>
+                </Col>
+                <Col sm={6}>
                 <Label sm={12} >Visitador</Label>
-                 <Col sm={6}>
+                 <Col >
                  <Input  type="text" name="visitador" value={visitador} onChange={handleChange} /> 
                  </Col>
-            </FormGroup>
-            <FormGroup>
-                <Label sm={12}>Fecha <span className="text-danger">*</span>  </Label>
-                <Col sm={6}>
-                <Input type="date"/>
                 </Col>
             </FormGroup>
             <FormGroup row>
-                <Col sm={8}>
+                <Col sm={3}>
+                <Label sm={12}>Fecha <span className="text-danger">*</span>  </Label>
+                <Col >
+                <Input type="date"/>
+                </Col>
+                </Col>
+           
+                <Col sm={3}>
                 <Label sm={12}>Teléfono</Label>
                  <Col >
                  <Input  type="text" name="telInsp" value={telInsp} onChange={handleChange} placeholder={telCliente}/> 
                  </Col>
                 </Col>
-                <Col sm={4}>
+                <Col sm={2}>
                 <Label sm={12} >Exten </Label>
                 <Col >
                 <Input  type="text" name="extenInsp" value={extInsp} onChange={handleChange}  placeholder={extTel}/> 
                 </Col>
                 </Col>
-            </FormGroup>
-            <FormGroup>
+                <Col sm={4}>
                 <Label sm={12} >Correo </Label>
-                <Col sm={6}>
+                <Col>
                 <Input  type="email" name="emailInsp" value={emailInsp} onChange={handleChange} placeholder={emailCliente} /> 
+                </Col>
                 </Col>
             </FormGroup>
             <FormGroup>
+
                 <Label sm={12}>Direccion  <span className="text-danger">*</span> </Label>
                 <Col sm={12}>
                 <Input  type="text" name="dirInsp" value={dirInsp} onChange={handleChange}  placeholder={direccionCliente}/> 
@@ -305,30 +403,59 @@ class  OrdenTrabajo extends React.Component {
             <FormGroup>
                 <Label sm={12} >Observaciones</Label>
                 <Col sm={12}>
-                <Input type="text" name="observaciones" value={observaciones} onChange={handleChange} /> 
+                <Input type="textarea" name="observaciones" value={observaciones} onChange={handleChange} /> 
                 </Col>
             </FormGroup>
-            <FormGroup>
-                <Label sm={12} className="ot-color">9. BIENES A VALUAR<span className="text-danger">*</span> </Label>
-                <Col sm={12}>
-                <Input  type="text" name="bienes" value={bienes} onChange={handleChange} /> 
+            </fieldset>
+            <hr/>
+            <fieldset className="fieldset">
+            <legend sm={12} className="ot-color">9. BIENES A VALUAR<span className="text-danger">*</span> </legend>
+            <FormGroup row>
+                <Col sm={3}>
+                    <Label sm={12}>Bienes</Label>
+                    <Col>
+                <Input  type="select" name="bienes" value={bienes} onChange={handleChange} >
+                    <option value="">Selecciona</option>
+                    <option value="CONSTRUCCIONES">CONSTRUCCIONES</option>
+                    <option value="DIVERSOS">DIVERSOS</option>
+                    <option value="EQUIPO DE CÓMPUTO">EQUIPO DE CÓMPUTO</option>
+                    <option value="HERRAMIENTAS">HERRAMIENTAS</option>
+                    <option value="INMUEBLES">INMUEBLES</option>
+                    <option value="INTANGIBLES">INTANGIBLES</option>
+                    <option value="JOYAS">JOYAS</option>
+                    <option value="MEJORAS">MEJORAS</option>
+                    <option value="MAQUINARIA Y EQUIPO">MAQUINARIA Y EQUIPO</option>
+                    <option value="MOLDES Y TROQUELES">MOLDES Y TROQUELES</option>
+                    <option value="MUEBLES Y ENSERES">MUEBLES Y ENSERES</option>
+                    <option value="OBRAS DE ARTE">OBRAS DE ARTE</option>
+                    <option value="TERRENO(S)">TERRENO(S)</option>
+                    <option value="TRACTOCAMIÓN">TRACTOCAMIÓN</option>
+                    <option value="VEHÍCULOS">VEHÍCULOS</option>
+
+                </Input> 
                 </Col>
-            </FormGroup>
-           <FormGroup>
+                
+                </Col>
+          
+               <Col sm={9}>
                 <Label sm={12} >Otros Bienes </Label>
-                <Col sm={12}>
+                <Col >
                 <Input type="text" name="otroBien" value={otroBien} onChange={handleChange} /> 
                 </Col>
+                </Col>
             </FormGroup>
+            </fieldset>
             <hr/>
-            <h6 className="ot-color">10. FECHAS <span className="text-danger">*</span> </h6>
+            <fieldset className="fieldset">
+            <legend className="ot-color">10. FECHAS <span className="text-danger">*</span> </legend>
             <FormGroup row>
                 <Col sm={6}>
-                <Label sm={12} >Inicio de Proyecto </Label>
+                <Label sm={10} >Inicio de Proyecto </Label>
                 <Col >
                     <Input type="date"/>
                 </Col>
                 </Col>
+              
                 <Col sm={6}>
                 <Label sm={12}>Entrega de Proyecto</Label>
                 <Col>
@@ -336,42 +463,73 @@ class  OrdenTrabajo extends React.Component {
                 </Col>
                 </Col>
             </FormGroup>
+            </fieldset>
             <hr/>
-            <FormGroup>
-            <Label sm={12}className="ot-color">11. INFORMACIÓN PROPORCIONADA</Label>
-            <Col sm={12}>
-            <Input  type="textarea" name="info" value={info} onChange={handleChange} /> 
-            </Col>
-            </FormGroup>
-            <FormGroup>
-            <Label sm={12}>Otra Información</Label>
-            <Col sm={12}>
-            <Input  type="textarea" name="otraInfo" value={otraInfo} onChange={handleChange} /> 
-            </Col>
-            </FormGroup>
-            <hr/>
+            <fieldset className="fieldset">
+            <legend className="ot-color">11. INFORMACIÓN PROPORCIONADA</legend>      
             <FormGroup row>
-                 <Col sm={6}>
+             <Col sm={3}>
+                 <Label sm={12}>Información</Label>
+                 <Col>
+            <Input  type="select" name="info" value={info} onChange={handleChange} >
+                <option value="">Selecciona</option>
+                <option value="AVALÚO ANTERIOR">AVALÚO ANTERIOR</option>
+                <option value="BOLETA DE AGUA">BOLETA DE AGUA</option>
+                <option value="BOLETA PREDIAL">BOLETA PREDIAL</option>
+                <option value="CATÁLOGO DE ARRENDAMIENTO">CATÁLOGO DE ARRENDAMIENTO</option>
+                <option value="CATÁLOGO DE CUENTAS">CATÁLOGO DE CUENTAS</option>
+                <option value="CONTRATO DE COMPRA-VENTA">CONTRATO DE COMPRA-VENTA</option>
+                <option value="ESCRITURAS">ESCRITURAS</option>
+                <option value="FACTURA">FACTURA</option>   
+                <option value="FOLIO REAL">FOLIO REAL</option>
+                <option value="LISTADO CONTABLE">LISTADO CONTABLE</option>
+                <option value="LISTA DE ACTIVO FIJO">LISTA DE ACTIVO FIJO</option>
+                <option value="LISTA DE PROVEEDORES">LISTA DE PROVEEDORES</option>
+                <option value="OFICIO">OFICIO</option>
+                <option value="ORDEN DE COMPRA">ORDEN DE COMPRA</option>
+                <option value="PEDIMIENTO DE IMPORTACIÓN">PEDIMIENTO DE IMPORTACIÓN</option>
+                <option value="PLACAS O ETIQUETAS">PLACAS O ETIQUETAS</option>   
+            </Input> 
+            </Col>
+            </Col>
+          <Col sm={9}>
+            <Label sm={12}>Otra Información</Label>
+            <Col >
+            <Input  type="text" name="otraInfo" value={otraInfo} onChange={handleChange} /> 
+            </Col>
+            </Col>
+            </FormGroup>
+            </fieldset>
+            <hr/>
+            <fieldset className="fieldset">
+            <FormGroup row>
+                 <Col sm={3}>
                 <Label  sm={12}className="ot-color">PRESUPUESTO</Label>
                 <Col >
                 <Input  type="text" name="presupuesto" value={presupuesto} onChange={handleChange} /> 
                 </Col>
                 </Col>
-                <Col sm={6}>
+                <Col sm={3}>
                 <Label sm={12}className="ot-color">MONTO VENDIDO <span className="text-danger">*</span> </Label>
                 <Col>
                 <Input  type="text" name="montoVendido" value={montoVendido} onChange={handleChange} /> 
                 </Col>
                 </Col>
-            </FormGroup> 
-            <FormGroup >
+                <Col sm={2}>
                 <Label sm={12} className="ot-color">ELABORO <span className="text-danger">*</span> </Label>
-                <Col sm={6}>
-                <Input  type="text" name="elaboro" value={elaboro} onChange={handleChange} /> 
+                <Col>
+                <Input  type="select" name="elaboro" value={elaboro} onChange={handleChange} >
+                    <option value="RLS">RLS</option>
+                    <option value="VGS">VGS </option>
+                    <option value="DHS">DHS</option>
+                    <option value="JLB">JLB</option>
+
+                
+                </Input> 
                 </Col>
-            </FormGroup>
-            <FormGroup row>
-                <Col sm={6}>
+                </Col>
+         
+                <Col sm={2}>
                 <Label sm={12}className="ot-color">ESTATUS <span className="text-danger">*</span> </Label>
                 <Col>
                 <Input  type="select" name="estatus" value={estatus} onChange={handleChange} >
@@ -382,13 +540,17 @@ class  OrdenTrabajo extends React.Component {
                 </Input> 
                 </Col>
                 </Col>
-                <Col sm={6}>
-                <Label sm={12}className="ot-color">FACTURAR <span className="text-danger">*</span> </Label>
+                <Col sm={2}>
+                <Label sm={11}className="ot-color">FACTURAR <span className="text-danger">*</span> </Label>
                 <Col>
-                <CustomInput  type="switch" name="facturar" value={facturar} onChange={handleChange} label="Selecciona"/> 
+                <Input type="select">
+                    <option>si</option>
+                    <option>no</option>
+                </Input>
                 </Col>
                 </Col>
             </FormGroup>
+            </fieldset>
             <hr/>
         <Button className="button-enviar" type="submit" >Enviar</Button><br/>
         <Modal

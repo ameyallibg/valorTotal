@@ -1,5 +1,8 @@
 .ot-color{
     color:#6161c1;
+    margin: 20px;
+    width: auto;
+    font-size:1.2vw;
 }
 .ot-center{
     text-align: center;
@@ -81,7 +84,7 @@
 .login-right{
     padding-left: 14%;
     padding-right: 14%;
-    padding-top: 5%;
+    padding-top: 10%;
     width: 50%;
     height: 100vh;
     overflow: hidden;
@@ -105,24 +108,51 @@
 
 
 
+
+
 @media(min-width: 680px){
-    .login-right{
-       
-        width: 50%;
-    }
+
+    fieldset{
+        border: .1px solid;
+    border-color: #bbb2b2;
+    
+    
+}
 
 .login-left{
     display:block;
     width: 50%;
     overflow: hidden;
 }
+    .collapsing{
+        
+        position: absolute!important;
+        background: white;
+        width: 25%;
+        padding-left:5%;
+        padding-bottom: 5%;
+        
+        margin-left: 75%;
+        
+        
+    }
+    .img-style{
+        height: 100vh;
+    }
+    .show
+    {
+     width: 25%;
+    background: white;
+    position: absolute !important;
+    margin-left: 75%;
+    padding-left:5%;
+    padding-bottom: 5%;
+    
+    }
 
-.img-style{
-    height: 100vh;
-}
     .center-box{
-        margin-left: 20%;
-        margin-right: 20%;
+        margin-left: 6%;
+        margin-right: 6%;
         padding-top:15%;
         padding: 5%;
         border-width: thin;
@@ -176,408 +206,15 @@
     .width-input{
         width: 50% !important;
     }
-    
+   .left{
+       float:left;
+   }
+   .nav-item{
+       padding:5%;
+   }
+   .LogoAnepsa{
+    width: 100%;
+   }
    
-}.ot-color{
-    color:#6161c1;
-}
-.ot-center{
-    text-align: center;
-
-}
-
-.ot-box-column{
-    display: flex;
-    flex-direction: column;
-    
-}
-.ot-box-row{
-    display: flex;
-    flex-direction: row;
-}
-
-.center-box{
-    display: flex;
-    flex-direction: column;
-    padding: 5%;
-
-}
-
-
-
-.modal-inner{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-
-}
-
-.modal-inner-lista{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-    
-}
-.text-align-left{
-    text-align: left
-}
-
-.form-group-style{
-    border:none;
-    
-}
-.title-style{
-    display:none;
-}
-.space-between{
-    color:white;
-}
-.space-between:hover{
-    color:white
-}
-.form-style{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 69vh;
-}
-
-
-@media(min-width: 680px){
-
-    .center-box{
-        margin-left: 20%;
-        margin-right: 20%;
-        padding-top:15%;
-        padding: 5%;
-        border-width: thin;
-        border-color: gray;
-
-        
-
-    }
-    .flex-direction-row{
-        display: flex;
-        flex-direction: row;
-    }
-    .modal-inner{
-        margin-left:33%;
-        margin-top:10%;
-        width: 33%;
-    }
-
-    .modal-inner-lista{
-        margin-top:2%;
-        width: 66%;
-
-    }
-    
-    .form-group-style{
-        border:solid;
-        border-color: gray;
-        border-width: thin
-    }
-    .button-enviar{
-        margin-left: 42.5%;
-        width: 15%;
-    }
-    .div-form{
-        
-        background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
-    }
-    .style-form{
-        
-        background: white;
-    }
-    .text-align-items{
-        text-align: center
-    }
-    .title-style{
-        padding:1%;
-        color:white;
-        display:block;
-
-    }
-    .width-input{
-        width: 50% !important;
-    }
-    
-   
-}.ot-color{
-    color:#6161c1;
-}
-.ot-center{
-    text-align: center;
-
-}
-
-.ot-box-column{
-    display: flex;
-    flex-direction: column;
-    
-}
-.ot-box-row{
-    display: flex;
-    flex-direction: row;
-}
-
-.center-box{
-    display: flex;
-    flex-direction: column;
-    padding: 5%;
-
-}
-
-
-
-.modal-inner{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-
-}
-
-.modal-inner-lista{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-    
-}
-.text-align-left{
-    text-align: left
-}
-
-.form-group-style{
-    border:none;
-    
-}
-.title-style{
-    display:none;
-}
-.space-between{
-    color:white;
-}
-.space-between:hover{
-    color:white
-}
-.form-style{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 69vh;
-}
-
-
-@media(min-width: 680px){
-
-    .center-box{
-        margin-left: 20%;
-        margin-right: 20%;
-        padding-top:15%;
-        padding: 5%;
-        border-width: thin;
-        border-color: gray;
-
-        
-
-    }
-    .flex-direction-row{
-        display: flex;
-        flex-direction: row;
-    }
-    .modal-inner{
-        margin-left:33%;
-        margin-top:10%;
-        width: 33%;
-    }
-
-    .modal-inner-lista{
-        margin-top:2%;
-        width: 66%;
-
-    }
-    
-    .form-group-style{
-        border:solid;
-        border-color: gray;
-        border-width: thin
-    }
-    .button-enviar{
-        margin-left: 42.5%;
-        width: 15%;
-    }
-    .div-form{
-        
-        background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
-    }
-    .style-form{
-        
-        background: white;
-    }
-    .text-align-items{
-        text-align: center
-    }
-    .title-style{
-        padding:1%;
-        color:white;
-        display:block;
-
-    }
-    .width-input{
-        width: 50% !important;
-    }
-    
-   
-}.ot-color{
-    color:#6161c1;
-}
-.ot-center{
-    text-align: center;
-
-}
-
-.ot-box-column{
-    display: flex;
-    flex-direction: column;
-    
-}
-.ot-box-row{
-    display: flex;
-    flex-direction: row;
-}
-
-.center-box{
-    display: flex;
-    flex-direction: column;
-    padding: 5%;
-
-}
-
-
-
-.modal-inner{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-
-}
-
-.modal-inner-lista{
-    margin-left: 16.6%;
-    margin-top:30%;
-    width: 66%;
-    border: solid;
-    border-color: #80808054;
-    border-radius: 6px;
-    padding: 2%;
-    background-color: white;
-    
-}
-.text-align-left{
-    text-align: left
-}
-
-.form-group-style{
-    border:none;
-    
-}
-.title-style{
-    display:none;
-}
-.space-between{
-    color:white;
-}
-.space-between:hover{
-    color:white
-}
-.form-style{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 69vh;
-}
-
-
-@media(min-width: 680px){
-
-    .center-box{
-        margin-left: 20%;
-        margin-right: 20%;
-        padding-top:15%;
-        padding: 5%;
-        border-width: thin;
-        border-color: gray;
-
-        
-
-    }
-    .flex-direction-row{
-        display: flex;
-        flex-direction: row;
-    }
-    .modal-inner{
-        margin-left:33%;
-        margin-top:10%;
-        width: 33%;
-    }
-
-    .modal-inner-lista{
-        margin-top:2%;
-        width: 66%;
-
-    }
-    
-    .form-group-style{
-        border:solid;
-        border-color: gray;
-        border-width: thin
-    }
-    .button-enviar{
-        margin-left: 42.5%;
-        width: 15%;
-    }
-    .div-form{
-        
-        background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
-    }
-    .style-form{
-        
-        background: white;
-    }
-    .text-align-items{
-        text-align: center
-    }
-    .title-style{
-        padding:1%;
-        color:white;
-        display:block;
-
-    }
-    .width-input{
-        width: 50% !important;
-    }
-    
    
 }
