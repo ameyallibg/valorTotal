@@ -33,6 +33,7 @@
     margin-top:30%;
     width: 66%;
     border: solid;
+   
     border-color: #80808054;
     border-radius: 6px;
     padding: 2%;
@@ -43,14 +44,17 @@
 .modal-inner-lista{
     margin-left: 16.6%;
     margin-top:30%;
-    width: 66%;
+    width: 70%;
     border: solid;
+    border-width: thin;
     border-color: #80808054;
     border-radius: 6px;
     padding: 2%;
     background-color: white;
     
+    
 }
+
 .text-align-left{
     text-align: left
 }
@@ -71,7 +75,7 @@
 .form-style{
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 69vh;
+    height: 65vh;
 }
 .login-left{
     display:none;
@@ -107,7 +111,39 @@
 }
 
 
-
+.card-style{
+    width:25%!important;
+    display: inline-block !important;
+    margin-left: 4.16%;
+    margin-right: 4.16%;
+    margin-bottom: 4.16%;
+}
+.card-home{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2%;
+    height: 87vh;
+}
+.nav-style{
+    position: sticky;
+    top:0;
+    padding: 0px;
+    border-bottom: solid;
+    border-width: thin;
+    border-color: whitesmoke;
+}
+.filtrar-style{
+    /* background: ige; */
+}
+.tabla-style{
+    background: #114c75;
+    color: white;
+    position: sticky;
+    top:75px;
+}
+.list:hover{
+    background: #e5ebf1
+}
 
 
 @media(min-width: 680px){
@@ -118,6 +154,8 @@
     
     
 }
+
+
 
 .login-left{
     display:block;
@@ -131,10 +169,15 @@
         width: 25%;
         padding-left:5%;
         padding-bottom: 5%;
-        
+        /* height: auto !important; */
         margin-left: 75%;
+        /* transition: height .35s ease !important; */
+        /* height: 100vh !important;  */
         
         
+    }
+    .collapsing.in {
+        height: 100vh !important; /*Set the height here*/
     }
     .img-style{
         height: 100vh;
@@ -173,7 +216,7 @@
 
     .modal-inner-lista{
         margin-top:2%;
-        width: 66%;
+       
 
     }
     
@@ -207,7 +250,10 @@
         width: 50% !important;
     }
    .left{
-       float:left;
+ 
+    width: 230px;
+    margin-top: 66%;
+    margin-bottom: 66%;
    }
    .nav-item{
        padding:5%;
@@ -215,6 +261,8 @@
    .LogoAnepsa{
     width: 100%;
    }
+
+   
    
    
 }

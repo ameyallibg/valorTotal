@@ -2,11 +2,15 @@ import React, {Component} from 'react';
 // import Navegador from '../components/Navbar'
 import {BrowserRouter, Route} from 'react-router-dom'
 import ListaOrdenes from '../components/ListaOrdenes'
+import Home from '../components/Home'
 import OrdenTrabajo from "../components/OrdenTrabajo"
 // import OrdenCreada from "./components/OrdenCreada"
 import { AppContext} from "../AppContext";
 import { NavLink } from "react-router-dom";
 import AnepsaLogo from "../assets/anepsa.png"
+import Drawer from '@material-ui/core/Drawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import {
   Collapse,
   Navbar,
@@ -31,43 +35,51 @@ class Menu extends Component  {
   
       this.toggle = this.toggle.bind(this);
       this.state = {
-        isOpen: false
+        drawerOpen: false
       };
     }
     toggle() {
       this.setState({
-        isOpen: !this.state.isOpen
+        // isOpen: !this.state.isOpen,
+        drawerOpen: !this.state.drawerOpen
       });
     }
   render(){
     const{handleLogout, getName, user} = this.context
   return (
     <BrowserRouter>
-  <Col sm={12} >
-    <Navbar color="white" light expand="md">
+  <Col sm={12} className="nav-style" >
+    <Navbar  color="white" light expand="md">
       
     <Col sm={2}>
         <NavbarBrand > <NavLink  to="/"><img src={AnepsaLogo} alt="logo-anepsa" className="LogoAnepsa"></img></NavLink></NavbarBrand>
         </Col>
-        <Col sm={7}></Col>
-       <Col sm={2}>
-        <p>{user} </p>
-        <p>{getName} </p>
+        <Col sm={6}></Col>
+       <Col sm={3}>
+        {/* <p>{user} </p> */}
+        <p>Hola, {getName} </p>
         </Col>
         <Col sm={1}>
         
-        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>+</Button>
+        <Button  color="white "  onClick={this.toggle} style={{ marginBottom: '1rem' }}><MenuIcon className="text-right"/></Button>
         </Col>
        
        
       </Navbar>
       </Col>
-        <Collapse isOpen={this.state.isOpen} >
+    
+        <Drawer
+        anchor="right"
+        open={this.state.drawerOpen}
+        onClose={this.toggle}
+       >
         
 
-          <Nav  navbar>
-            <div className="left">
-            <NavItem>Orden de trabajo</NavItem>
+          <Nav  navbar className="navbar-style">
+            
+            <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
+            <div className="left text-center">
+            <NavItem > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
             <NavItem>Directorio Clientes</NavItem>
             <NavItem>Historial de Ventas</NavItem>
             <NavItem>Agenda del vendedor</NavItem>
@@ -79,20 +91,21 @@ class Menu extends Component  {
             </NavItem>
 
             <NavItem>
-                {/* <Button color="success">  <NavLink className="space-between"  to="/OrdenTrabajo">Crear</NavLink></Button> */}
               
             </NavItem>
             </div>
           </Nav>
-        </Collapse>
+     
+        </Drawer>
   
   
  
   
     <div className="App">
-            {/* <Navegador></Navegador> */}
-            <Route exact path="/" render={() => <ListaOrdenes />} />
+         
+            <Route exact path="/" render={() => <Home />} />
             <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
+            <Route path="/ListaOrdenes" render={() => <ListaOrdenes />} />
            
    </div>
       
