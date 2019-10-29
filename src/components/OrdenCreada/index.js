@@ -1,26 +1,34 @@
 
 import React from 'react';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 
 
-import {Button,   Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import {Button,   Form, FormGroup, Label, Input, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+// 
+
 
 
 
 
 class OrdenCreada extends React.Component {
+
     render() {
         const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus}=this.context
  
-        // const{ list} = this.context
+        // const{ list} = this.context}
+        
+        
         return (
+        
             <Modal
             isOpen={modalIsOpen}
-            onRequestClose={closeModal}
+            toggle={closeModal}
             className="modal-inner-lista"
+              
             > 
             <div>
-            <h5 className="text-danger text-center">Orden Creada</h5>
+            <h5 className="text-info text-center">Orden Creada</h5>
+            <hr/>
            
             
             {consulta.map((item , index)=>(
@@ -269,9 +277,9 @@ class OrdenCreada extends React.Component {
         
             
         )
-}
-}
-Modal.setAppElement('body');
+}}
+
+// Modal.setAppElement('body');
 
 
 export default OrdenCreada

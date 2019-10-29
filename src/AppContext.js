@@ -1,8 +1,8 @@
-
   
 import React, { Component } from "react";
 import db from "./Fire.js";
 import firebase from 'firebase';
+
 
 
 
@@ -27,6 +27,7 @@ export const AppContext = React.createContext()
             buscador:"",
             newestatus:"",
             getName:"",
+           
             
            
         }
@@ -37,9 +38,12 @@ export const AppContext = React.createContext()
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteFilter = this.deleteFilter.bind(this)
-   this.handleChangeSelect = this.handleChangeSelect.bind(this);
+    this.handleChangeSelect = this.handleChangeSelect.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleChangeSeller = this.handleChangeSeller.bind(this);
+    this.handleChangeProject = this.handleChangeProject.bind(this)
   
     }
     //Funcion para cuando aparece el modal
@@ -89,6 +93,60 @@ export const AppContext = React.createContext()
       
       
   } 
+  handleChangeSeller= (e)=>{
+        
+    const handle = e.target.value
+    
+    console.log(handle)
+   
+    if(handle === ""){
+     
+      db.collection("orden").onSnapshot(this.obtenerBD)
+   
+      }else {
+        db.collection("orden").where("vendedor", "==", handle )
+        .get()
+        .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+                
+                this.setState({
+                  items:data
+  
+                })
+                
+                
+            });
+      }
+    
+    
+} 
+handleChangeProject= (e)=>{
+        
+  const handle = e.target.value
+  
+  console.log(handle)
+  console.log(this.state.buscador)
+  if(handle === ""){
+   
+    db.collection("orden").onSnapshot(this.obtenerBD)
+ 
+    }else {
+      db.collection("orden").where("uge", "==", handle )
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+              
+              this.setState({
+                items:data
+
+              })
+              
+              
+          });
+    }
+  
+  
+} 
   handleChangeDate = (e) =>{
 
     const handle = e.target.value
@@ -167,11 +225,15 @@ export const AppContext = React.createContext()
             
             
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
-            const dateClave = this.state.dateNew.substr(2,5).replace("-","");  
-            const newDate = this.state.dateNew.slice(5, 7)
+            const dateClave = this.state.dateNew.substr(2,3).replace("/","")
+            const newDate = this.state.dateNew.slice(6, 8)
+            
+            console.log(dateClave)
             console.log(this.state.mes)
             console.log(newDate)
             console.log(this.state.getDate)
+           
+            
 
            
            if(newDate ===
@@ -182,7 +244,7 @@ export const AppContext = React.createContext()
            
                    
               if(contador < 100 && contador < 10){ 
-                const claveUnica = dateClave + ugeClave + '00'+ contador
+                const claveUnica = newDate+ dateClave + ugeClave + '00'+ contador
           
             
                 document.getElementById("formClear").reset();
@@ -197,8 +259,8 @@ export const AppContext = React.createContext()
                   estatus: this.state.estatus,
                   productClave: claveUnica,
                   contador: contador,
-                  mes:newDate,
-                
+                  mes:dateClave,
+                  date: new Date().toLocaleString()
                })
 
               
@@ -212,22 +274,27 @@ export const AppContext = React.createContext()
                  estatus:"",
                  productClave:"",
                  newcontador: contador,
+                 dateNew: new Date().toLocaleString(),
+
       
               }, () => {console.log(this.state.mes)})
               } else if(contador < 100 && contador > 10){
-                const claveUnica = dateClave + ugeClave +  '0'+contador
+                const claveUnica = newDate + dateClave + ugeClave + '0'+ contador
           
             
                 document.getElementById("formClear").reset();
                 
                 db.collection("orden").add({
                 
+                   
                   vendedor: this.state.vendedor,
                   uge: this.state.uge,
                   dateNew: this.state.dateNew,
                   estatus: this.state.estatus,
                   productClave: claveUnica,
-                  date: this.state.dateNew,
+                  contador: contador,
+                  mes:dateClave,
+                  date: new Date().toLocaleString()
                 
                })
       
@@ -239,6 +306,7 @@ export const AppContext = React.createContext()
                  fecha:"",
                  estatus:"",
                  productClave:"",
+                 dateNew: new Date().toLocaleString(),
       
               })
               } else { 
@@ -312,6 +380,13 @@ export const AppContext = React.createContext()
     }, () => {console.log(this.state.mes)})
   }
 
+  
+  }
+
+  handleLogout(){
+    firebase.auth().signOut()
+    .then(result => console.log(`${result.user.email} ha salido`))
+    .catch(error => console.log(`Error ${error.code}: ${error.message}`));
   }
   obtenerUser= ()=>{
     const usuario = this.state.user
@@ -321,13 +396,14 @@ export const AppContext = React.createContext()
       
       const getUser = data[0].name
       console.log(getUser)
-      console.log(this.state)
+      
+      
            
 
             
   
             this.setState({ getName: getUser })
-          })
+          }) 
    
     
   }
@@ -339,7 +415,7 @@ export const AppContext = React.createContext()
        const user =  firebase.auth().currentUser.email
        this.setState({
          user:user
-       }, () => console.log(this.state.user))
+       })
        
       }
 
@@ -370,6 +446,8 @@ export const AppContext = React.createContext()
       
       
      let newid=  e.target.id
+     console.log(newid)
+   
      
       db.collection("orden").where("productClave", "==", newid)
     .get()
@@ -387,9 +465,11 @@ export const AppContext = React.createContext()
     }
 
     deleteFilter() {
-      document.getElementsByName("estatus")[0].value  = "estatus";
+      document.getElementsByName("estatus")[0].value  = "";
       document.getElementsByName("buscador")[0].value = "";
-      document.getElementsByName("fechaBuscador")[0].value = ""
+      document.getElementsByName("fechaBuscador")[0].value = "";
+      document.getElementsByName("nombreVendedor")[0].value= "";
+      document.getElementsByName("tipoProyecto")[0].value="";
       db.collection("orden").onSnapshot(this.obtenerBD)
 
     
@@ -417,7 +497,7 @@ export const AppContext = React.createContext()
 
   
     render() {
-        const {newOrder, list, items, consulta} = this.state;
+        const {newOrder, list, items, consulta, getName, user} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -426,9 +506,12 @@ export const AppContext = React.createContext()
           handleChange: this.handleChange,
           handleChangeFound: this.handleChangeFound,
           handleChangeDate: this.handleChangeDate,
+          handleChangeSeller:this.handleChangeSeller,
+          handleChangeProject:this.handleChangeProject,
           handleChangeSelect: this.handleChangeSelect,
           deleteFilter: this.deleteFilter,
           handleSubmit: this.handleSubmit ,
+          handleLogout:this.handleLogout,
           productClave:this.state.productClave,
           modalIsOpen:this.state.modalIsOpen,
           openModal:this.openModal,
@@ -440,6 +523,8 @@ export const AppContext = React.createContext()
           list,
           items,
           consulta,
+          getName,
+          user,
           
 
         }}
