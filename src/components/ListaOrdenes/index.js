@@ -2,7 +2,6 @@ import React from 'react';
 import {Table, Button, Input} from 'reactstrap';
 import OrdenCreada from "../../components/OrdenCreada"
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-// import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 
 import { Link } from 'react-router-dom';
@@ -58,16 +57,15 @@ class  ListaOrdenes extends React.Component {
           <th>
              <Input type="select" name="tipoProyecto" onChange={handleChangeProject}>
                 <option value="">Proyecto</option>
-                <option value="civil">Civil</option>
-                        <option value="direccion">Direccion</option>
-                        <option value="finanzas">Finanzas</option>
-                        <option value="industrial">Industrial</option>
-                        <option value="administracion">Administracion o Contabilidad</option>
-                        <option value="civ-ind">Civil-Industrial</option>
-                        <option value="civ-fin">Civil-Finanzas</option>
-                        <option value="fin-ind">Finanzas-Industrial</option>
-                        <option value="ind-prod">Industrial-Producción</option>
-                        <option value="civ-fin-ind">Civil-Finanzas-Industrial</option>
+               
+       
+                <option value="CIVIL">CIVIL</option>
+                         <option value="FINANCIERA">FINANCIERA</option>
+                         <option value="INDUSTRIAL">INDUSTRIAL</option>
+                         <option value="CIVIL-INDUSTRIAL">CIVIL-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA">CIVIL-FINANCIERA</option>
+                         <option value="FINANCIERA-INDUSTRIAL">FINANCIERA-INDUSTRIAL</option>
+                         <option value="CIVIL-FINANCIERA-INDUSTRIAL">CIVIL-FINANCIERA-INDUSTRIAL</option>
             </Input>
           </th>
           <th>
@@ -132,7 +130,7 @@ class  ListaOrdenes extends React.Component {
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
-          <td>{item.dateNew}</td>
+          <td>{item.date}</td>
           <td>{item.estatus}</td>
           <td><DeleteOutlineOutlinedIcon /></td>
         </tr>

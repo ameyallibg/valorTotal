@@ -1,10 +1,10 @@
 
 import React from 'react';
-// import Modal from 'react-modal';
+import Modal from 'react-modal';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
+import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
-import {Button,   Form, FormGroup, Label, Input, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// 
 
 
 
@@ -26,11 +26,16 @@ class OrdenCreada extends React.Component {
             className="modal-inner-lista"
               
             > 
-            <div>
-            <h5 className="text-info text-center">Orden Creada</h5>
+            
+            <CloseOutlinedIcon className="float-right" onClick={closeModal}/>
+      
+           
+            <p className="text-info text-center">Orden Creada</p>
+
             <hr/>
            
-            
+           
+         
             {consulta.map((item , index)=>(
               <div key={index}>
                 <Form className="form-style">
@@ -53,7 +58,7 @@ class OrdenCreada extends React.Component {
               </Col>
               <Col sm={2}>
               <Label> ESTATUS: </Label> 
-              <Input type="text" name="newestatus" value={newestatus} placeholder={item.estatus} onChange={handleUpdate}></Input>
+              <Input type="text" name="newestatus" value={newestatus}  ></Input>
               </Col>
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
@@ -271,7 +276,7 @@ class OrdenCreada extends React.Component {
                   <hr/>   
                   <Button onClick={closeModal} >Cerrar</Button>
                  
-           </div>
+              
            
            </Modal>
         
@@ -279,7 +284,7 @@ class OrdenCreada extends React.Component {
         )
 }}
 
-// Modal.setAppElement('body');
+Modal.setAppElement('body');
 
 
 export default OrdenCreada

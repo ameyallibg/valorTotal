@@ -2,7 +2,7 @@
     color:#6161c1;
     margin: 20px;
     width: auto;
-    font-size:1.2vw;
+    font-size:1.1vw;
 }
 .ot-center{
     text-align: center;
@@ -23,9 +23,17 @@
     display: flex;
     flex-direction: column;
     padding: 5%;
+    position: relative;
+
 
 }
-
+a span {
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    overflow: hidden;
+    top: -10px;
+   }
 
 
 .modal-inner{
@@ -33,7 +41,7 @@
     margin-top:30%;
     width: 66%;
     border: solid;
-   
+
     border-color: #80808054;
     border-radius: 6px;
     padding: 2%;
@@ -42,7 +50,8 @@
 }
 
 .modal-inner-lista{
-    margin-left: 16.6%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top:30%;
     width: 70%;
     border: solid;
@@ -128,13 +137,10 @@
     position: sticky;
     top:0;
     padding: 0px;
-    border-bottom: solid;
-    border-width: thin;
-    border-color: whitesmoke;
+    z-index:2;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2)
 }
-.filtrar-style{
-    /* background: ige; */
-}
+
 .tabla-style{
     background: #114c75;
     color: white;
@@ -144,7 +150,19 @@
 .list:hover{
     background: #e5ebf1
 }
+.MuiPaper-elevation1 {
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)!important;
+}
+.log-out{
+    	width: 100%;
+	     position: absolute;
+	     left: 0px;
+	     bottom: 12%;
+         border-radius: 0px;
+         border-color:none!important;
 
+
+}
 
 @media(min-width: 680px){
 
@@ -194,10 +212,11 @@
     }
 
     .center-box{
-        margin-left: 6%;
-        margin-right: 6%;
-        padding-top:15%;
-        padding: 5%;
+        margin-left: 4%;
+        margin-right: 4%;
+        
+
+        padding-top:2%;
         border-width: thin;
         border-color: gray;
 
@@ -230,7 +249,7 @@
         width: 15%;
     }
     .div-form{
-        
+        padding-top: 3%;
         background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
     }
     .style-form{
@@ -254,6 +273,7 @@
     width: 230px;
     margin-top: 66%;
     margin-bottom: 66%;
+    padding-left:15%;
    }
    .nav-item{
        padding:5%;

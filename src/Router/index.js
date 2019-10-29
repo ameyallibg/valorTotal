@@ -45,7 +45,7 @@ class Menu extends Component  {
       });
     }
   render(){
-    const{handleLogout, getName, user} = this.context
+    const{handleLogout, getName, user, dateNew} = this.context
   return (
     <BrowserRouter>
   <Col sm={12} className="nav-style" >
@@ -58,6 +58,7 @@ class Menu extends Component  {
        <Col sm={3}>
         {/* <p>{user} </p> */}
         <p>Hola, {getName} </p>
+        <p>{dateNew}</p>
         </Col>
         <Col sm={1}>
         
@@ -78,15 +79,15 @@ class Menu extends Component  {
           <Nav  navbar className="navbar-style">
             
             <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
-            <div className="left text-center">
-            <NavItem > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
+            <div className="left ml-10 text-left ">
+            <NavItem  > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
             <NavItem>Directorio Clientes</NavItem>
             <NavItem>Historial de Ventas</NavItem>
             <NavItem>Agenda del vendedor</NavItem>
            
             <NavItem>
            
-         <Button onClick={handleLogout} className="log-out">Cerrar Sesión</Button>
+         <Button  onClick={handleLogout} className="log-out center">Cerrar Sesión</Button>
     
             </NavItem>
 

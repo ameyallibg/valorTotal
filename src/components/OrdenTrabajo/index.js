@@ -15,13 +15,15 @@ class  OrdenTrabajo extends React.Component {
     objetivo, otroObj, proposito, otroProp,
     presentarse, visitador,
     telInsp, emailInsp, dirInsp, observaciones,
-    bienes,otroBien,presupuesto, montoVendido, elaboro, estatus, facturar,modalIsOpen,  dateNew, info, otraInfo, emailCliente, delegacionSol, extInsp, handleChange ,handleSubmit, closeModal, } = this.context
+    bienes,otroBien,presupuesto, montoVendido, elaboro, estatus, facturar,modalIsOpen,  dateNew, info, otraInfo, emailCliente, delegacionSol, message, extInsp, handleChange ,handleSubmit, closeModal, } = this.context
     
     return ( 
         //Ceacion formulario
         <div className="div-form">
-            <h3 className="text-align-items title-style">.</h3>
+            
             <Form  className="center-box style-form" id="formClear" onSubmit={handleSubmit}>
+           
+               
                 <h5 className="ot-color ot-center">ORDEN DE TRABAJO</h5>
                 <br/>
                 <fieldset className="fieldset">
@@ -552,18 +554,20 @@ class  OrdenTrabajo extends React.Component {
             </FormGroup>
             </fieldset>
             <hr/>
-        <Button className="button-enviar" type="submit" >Enviar</Button><br/>
+        <Button className="button-enviar" type="submit"  >Enviar</Button><br/>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           className="modal-inner"
+        
           > 
           <div>
           <h5 className="text-danger text-center">¡Atencion!</h5>
           <hr/>
-          <h6 className="text-danger text center">No se pudo enviar el formulario</h6>
+          <p>{message}</p>
+          {/* <h6 className="text-danger text center">{No se pudo enviar el formulario}</h6> */}
                 
-            <div>Porfavor contesta todos los campos obligatorios</div>
+            {/* <div>Porfavor contesta todos los campos obligatorios</div> */}
                 <hr/>   
                 <Button onClick={closeModal} >Cerrar</Button>
          </div>
