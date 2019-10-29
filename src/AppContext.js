@@ -18,7 +18,7 @@ export const AppContext = React.createContext()
             uge:"",
             estatus:"",
             productClave:"",
-            dateNew: new Date().toLocaleString(),
+            // dateNew: new Date().toLocaleString(),
             items:[] ,
             newcontador: 0,
             mes: [],
@@ -27,6 +27,7 @@ export const AppContext = React.createContext()
             buscador:"",
             newestatus:"",
             getName:"",
+            modalIsOpen:false,
            
             
            
@@ -149,7 +150,7 @@ handleChangeProject= (e)=>{
 } 
   handleChangeDate = (e) =>{
 
-    const handle = e.target.value
+    const handle = e.target.value.replace(/-/g,"/")
       
     console.log(handle)
     
@@ -158,7 +159,7 @@ handleChangeProject= (e)=>{
       db.collection("orden").onSnapshot(this.obtenerBD)
    
       }else {
-        db.collection("orden").where("dateNew", "==", handle )
+        db.collection("orden").where("getNewDate", "==", handle )
         .get()
         .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
@@ -223,10 +224,11 @@ handleChangeProject= (e)=>{
         
             
             
-            
+            let obtDate= new Date().toLocaleString();
+            console.log(obtDate)
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
-            const dateClave = this.state.dateNew.substr(2,3).replace("/","")
-            const newDate = this.state.dateNew.slice(6, 8)
+            const dateClave = obtDate.substr(2,3).replace("/","")
+            const newDate = obtDate.slice(6, 8)
             
             console.log(dateClave)
             console.log(this.state.mes)
@@ -236,14 +238,14 @@ handleChangeProject= (e)=>{
             
 
            
-           if(newDate ===
+           if(dateClave ===
              this.state.mes){
               
-              let contador = this.state.getDate +1 ;
+              let contador = parseInt(this.state.getDate) + 1 ;
 
            
                    
-              if(contador < 100 && contador < 10){ 
+              if( contador < 10){ 
                 const claveUnica = newDate+ dateClave + ugeClave + '00'+ contador
           
             
@@ -255,18 +257,15 @@ handleChangeProject= (e)=>{
                 
                   vendedor: this.state.vendedor,
                   uge: this.state.uge,
-                  dateNew: this.state.dateNew,
+                 
                   estatus: this.state.estatus,
                   productClave: claveUnica,
                   contador: contador,
                   mes:dateClave,
-                  date: new Date().toLocaleString()
+                  date: new Date().toLocaleString(),
+                  getNewDate: new Date().toLocaleDateString("zh-TW"),
                })
 
-              
-      
-              
-              
               this.setState({
                  vendedor:"",
                  uge:"",
@@ -275,6 +274,7 @@ handleChangeProject= (e)=>{
                  productClave:"",
                  newcontador: contador,
                  dateNew: new Date().toLocaleString(),
+                 getNewDate: new Date().toLocaleDateString(),
 
       
               }, () => {console.log(this.state.mes)})
@@ -289,39 +289,46 @@ handleChangeProject= (e)=>{
                    
                   vendedor: this.state.vendedor,
                   uge: this.state.uge,
-                  dateNew: this.state.dateNew,
+                 
                   estatus: this.state.estatus,
                   productClave: claveUnica,
                   contador: contador,
                   mes:dateClave,
-                  date: new Date().toLocaleString()
+                  date: new Date().toLocaleString(),
+                  getNewDate: new Date().toLocaleDateString("zh-TW"),
                 
                })
       
               
               
               this.setState({
-                 vendedor:"",
-                 uge:"",
-                 fecha:"",
-                 estatus:"",
-                 productClave:"",
-                 dateNew: new Date().toLocaleString(),
-      
+                vendedor:"",
+                uge:"",
+                fecha:"",
+                estatus:"",
+                productClave:"",
+                newcontador: contador,
+                dateNew: new Date().toLocaleString(),
+                getNewDate: new Date().toLocaleDateString(),
               })
               } else { 
-                const claveUnica = dateClave + ugeClave + contador
+                const claveUnica = newDate + dateClave + ugeClave + contador
           
             
                 document.getElementById("formClear").reset();
                 
                 db.collection("orden").add({
                 
+                 
                   vendedor: this.state.vendedor,
                   uge: this.state.uge,
-                  dateNew: this.state.dateNew,
+                 
                   estatus: this.state.estatus,
                   productClave: claveUnica,
+                  contador: contador,
+                  mes:dateClave,
+                  date: new Date().toLocaleString(),
+                  getNewDate: new Date().toLocaleDateString("zh-TW"),
                   
                 
                })
@@ -329,11 +336,14 @@ handleChangeProject= (e)=>{
               
               
               this.setState({
-                 vendedor:"",
-                 uge:"",
-                 fecha:"",
-                 estatus:"",
-                 productClave:"",
+                vendedor:"",
+                uge:"",
+                fecha:"",
+                estatus:"",
+                productClave:"",
+                newcontador: contador,
+                dateNew: new Date().toLocaleString(),
+                getNewDate: new Date().toLocaleDateString(),
       
               })
               }
@@ -414,13 +424,14 @@ handleChangeProject= (e)=>{
        db.collection("usuarios").onSnapshot(this.obtenerUser)
        const user =  firebase.auth().currentUser.email
        this.setState({
-         user:user
+         user:user,
+         dateNew: new Date().toLocaleDateString()
        })
        
       }
 
       obtenerBD=()=>{
-        db.collection("orden").orderBy("dateNew", "desc")
+        db.collection("orden").orderBy("date", "desc")
           .get()
           .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
@@ -428,11 +439,12 @@ handleChangeProject= (e)=>{
             this.setState({ items: data });
           }, console.log(this.state.items));
 
-          db.collection("orden").orderBy("dateNew", "desc").limit(1)
+          db.collection("orden").orderBy("date", "desc").limit(1)
           .get().then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
            const newobj = data[0].contador
            const newmes = data[0].mes
+           console.log(newobj, newmes)
 
             
   
@@ -484,11 +496,18 @@ handleChangeProject= (e)=>{
                 message:'Contesta los campos obligatorios'
 
             })
+              
                 return   false
          
 
            
         }
+       
+        this.setState({
+          modalIsOpen:true,
+          message:'Se ha enviado correctamente'
+
+      })
         return true
     }
     //Generador de clave unica
@@ -497,7 +516,7 @@ handleChangeProject= (e)=>{
 
   
     render() {
-        const {newOrder, list, items, consulta, getName, user} = this.state;
+        const {newOrder, list, items, consulta, getName, user, dateNew, message} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -518,13 +537,14 @@ handleChangeProject= (e)=>{
           closeModal:this.closeModal,
           handleUpdate:this.handleUpdate,
 
-      
+          message,
           newOrder,
           list,
           items,
           consulta,
           getName,
           user,
+          dateNew,
           
 
         }}
