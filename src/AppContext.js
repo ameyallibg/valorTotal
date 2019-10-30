@@ -45,6 +45,7 @@ export const AppContext = React.createContext()
     this.closeModal = this.closeModal.bind(this);
     this.handleChangeSeller = this.handleChangeSeller.bind(this);
     this.handleChangeProject = this.handleChangeProject.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   
     }
     //Funcion para cuando aparece el modal
@@ -65,6 +66,30 @@ export const AppContext = React.createContext()
         
         
     } 
+    onDelete(e){
+       
+     const newid=  e.target.id
+     console.log(newid)
+     db.collection("orden").where("productClave", "==", newid )
+     .get()
+     .then(querySnapshot => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.delete().then(() => {
+          console.log("Document successfully deleted!");
+        }).catch(function(error) {
+          console.error("Error removing document: ", error);
+        });
+      });
+    })
+    .catch(function(error) {
+      console.log("Error getting documents: ", error);
+    });
+
+     
+ 
+  
+
+    }
 
 
     handleChangeFound= (e)=>{
@@ -220,177 +245,88 @@ handleChangeProject= (e)=>{
         e.preventDefault();
         if(!this.validate()){
             return
-        }
-        
-            
-            
+        }   
+            document.getElementById("formClear").reset();  
             let obtDate= new Date().toLocaleString();
-            console.log(obtDate)
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
             const dateClave = obtDate.substr(2,3).replace("/","")
             const newDate = obtDate.slice(6, 8)
             
-            console.log(dateClave)
-            console.log(this.state.mes)
-            console.log(newDate)
-            console.log(this.state.getDate)
-           
-            
-
-           
            if(dateClave ===
              this.state.mes){
               
-              let contador = parseInt(this.state.getDate) + 1 ;
+             let contador = parseInt(this.state.getDate) + 1 ;
 
-           
+             let claveUnica ;
                    
               if( contador < 10){ 
-                const claveUnica = newDate+ dateClave + ugeClave + '00'+ contador
-          
-            
-                document.getElementById("formClear").reset();
-
-               
-                
-                db.collection("orden").add({
-                
-                  vendedor: this.state.vendedor,
-                  uge: this.state.uge,
-                 
-                  estatus: this.state.estatus,
-                  productClave: claveUnica,
-                  contador: contador,
-                  mes:dateClave,
-                  date: new Date().toLocaleString(),
-                  getNewDate: new Date().toLocaleDateString("zh-TW"),
-               })
-
-              this.setState({
-                 vendedor:"",
-                 uge:"",
-                 fecha:"",
-                 estatus:"",
-                 productClave:"",
-                 newcontador: contador,
-                 dateNew: new Date().toLocaleString(),
-                 getNewDate: new Date().toLocaleDateString(),
-
-      
-              }, () => {console.log(this.state.mes)})
-              } else if(contador < 100 && contador > 10){
-                const claveUnica = newDate + dateClave + ugeClave + '0'+ contador
-          
-            
-                document.getElementById("formClear").reset();
-                
-                db.collection("orden").add({
-                
-                   
-                  vendedor: this.state.vendedor,
-                  uge: this.state.uge,
-                 
-                  estatus: this.state.estatus,
-                  productClave: claveUnica,
-                  contador: contador,
-                  mes:dateClave,
-                  date: new Date().toLocaleString(),
-                  getNewDate: new Date().toLocaleDateString("zh-TW"),
-                
-               })
-      
-              
-              
-              this.setState({
-                vendedor:"",
-                uge:"",
-                fecha:"",
-                estatus:"",
-                productClave:"",
-                newcontador: contador,
-                dateNew: new Date().toLocaleString(),
-                getNewDate: new Date().toLocaleDateString(),
-              })
+                 claveUnica = newDate+ dateClave + ugeClave + '00'+ contador
+              } else if(contador < 100 && contador >= 10){
+                 claveUnica = newDate + dateClave + ugeClave + '0'+ contador
               } else { 
-                const claveUnica = newDate + dateClave + ugeClave + contador
-          
-            
-                document.getElementById("formClear").reset();
-                
-                db.collection("orden").add({
-                
-                 
-                  vendedor: this.state.vendedor,
-                  uge: this.state.uge,
-                 
-                  estatus: this.state.estatus,
-                  productClave: claveUnica,
-                  contador: contador,
-                  mes:dateClave,
-                  date: new Date().toLocaleString(),
-                  getNewDate: new Date().toLocaleDateString("zh-TW"),
-                  
-                
-               })
-      
-              
-              
-              this.setState({
-                vendedor:"",
-                uge:"",
-                fecha:"",
-                estatus:"",
-                productClave:"",
-                newcontador: contador,
-                dateNew: new Date().toLocaleString(),
-                getNewDate: new Date().toLocaleDateString(),
-      
-              })
+                 claveUnica = newDate + dateClave + ugeClave + contador
               }
-                
-   
+              
+        if(this.state.rol === "admin"){
+                         
+          
+
+          }else{
+            db.collection("orden").add({
+              vendedor: this.state.getName,
+              uge: this.state.uge,      
+              estatus: this.state.estatus,
+              productClave: claveUnica,
+              contador: contador,
+              mes:dateClave,
+              date: new Date().toLocaleString(),
+              getNewDate: new Date().toLocaleDateString("zh-TW"),
+           })
+
+          }
+          
+          this.setState({
+            vendedor:"",
+            uge:"",
+            fecha:"",
+            estatus:"",
+            productClave:"",
+            newcontador: contador,
+            dateNew: new Date().toLocaleString(),
+            getNewDate: new Date().toLocaleDateString(),
+
+ 
+         }, () => {console.log(this.state.mes)})
+
     }
    else {
-    
-
     const contador = 1;
+    const claveUnica = dateClave + ugeClave + '00'+ contador
 
-
-      const claveUnica = dateClave + ugeClave + '00'+ contador
-
-  
-      document.getElementById("formClear").reset();
-
-     
-      
       db.collection("orden").add({
       
         vendedor: this.state.vendedor,
-        uge: this.state.uge,
-        dateNew: this.state.dateNew,
+        uge: this.state.uge,      
         estatus: this.state.estatus,
         productClave: claveUnica,
         contador: contador,
-        mes:newDate,
+        mes:dateClave,
+        date: new Date().toLocaleString(),
+        getNewDate: new Date().toLocaleDateString("zh-TW"),
       
      })
-
-    
-
-    
-    
     this.setState({
-       vendedor:"",
-       uge:"",
-       fecha:"",
-       estatus:"",
-       productClave:"",
-       getDate: contador,
+      vendedor:"",
+      uge:"",
+      fecha:"",
+      estatus:"",
+      productClave:"",
+      newcontador: contador,
+      dateNew: new Date().toLocaleString(),
+      getNewDate: new Date().toLocaleDateString(),
 
-    }, () => {console.log(this.state.mes)})
-  }
-
-  
+      }, () => {console.log(this.state.mes)})
+    }
   }
 
   handleLogout(){
@@ -398,61 +334,70 @@ handleChangeProject= (e)=>{
     .then(result => console.log(`${result.user.email} ha salido`))
     .catch(error => console.log(`Error ${error.code}: ${error.message}`));
   }
+
+
   obtenerUser= ()=>{
     const usuario = this.state.user
+    console.log(usuario)
 
     db.collection("usuarios").where("email","==",  usuario ).get().then(querySnapshot => {
       const data = querySnapshot.docs.map(doc => doc.data());
       
       const getUser = data[0].name
-      console.log(getUser)
-      
-      
-           
+      const admin = data[0].rol
+      const dataNew = data
+      console.log(admin, dataNew, getUser)
 
-            
-  
-            this.setState({ getName: getUser })
+            this.setState({ getName: getUser,
+            rol:admin })
           }) 
    
     
   }
 
-    componentDidMount() {
 
-       db.collection("orden").onSnapshot(this.obtenerBD)
-       db.collection("usuarios").onSnapshot(this.obtenerUser)
-       const user =  firebase.auth().currentUser.email
-       this.setState({
-         user:user,
-         dateNew: new Date().toLocaleDateString()
-       })
+  obtenerBD=()=>{
+        const obtRol = this.state.rol
+        const obtName = this.state.getName
+        console.log(obtRol, obtName)
+        if(obtRol === "admin"){
+    db.collection("orden").orderBy("date", "desc")
+      .get()
+      .then(querySnapshot => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+        console.log(data)
+        const newobj = data[0].contador
+       const newmes = data[0].mes
+       console.log(newobj, newmes)
+        this.setState({ items: data, getDate:newobj, mes:newmes });
        
+      }, console.log(this.state.items));
+
+    } else{
+      db.collection("orden").where("vendedor", "==", obtName).orderBy("date", "desc")
+      .get()
+      .then(querySnapshot => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+        console.log(data)
+        const newobj = data[0].contador
+       const newmes = data[0].mes
+       console.log(newobj, newmes)
+
+        this.setState({ items: data ,getDate: newobj, mes:newmes});
+      }, console.log(this.state.items));
+    }
+  }
+
+    componentDidMount() {
+      const user =  firebase.auth().currentUser.email
+      this.setState({
+        user:user,
+        dateNew: new Date().toLocaleDateString()
+      })
+    
+      db.collection("usuarios").onSnapshot(this.obtenerUser)
+      setTimeout(()=>{db.collection("orden").onSnapshot(this.obtenerBD)},1000)
       }
-
-      obtenerBD=()=>{
-        db.collection("orden").orderBy("date", "desc")
-          .get()
-          .then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-            console.log(data)
-            this.setState({ items: data });
-          }, console.log(this.state.items));
-
-          db.collection("orden").orderBy("date", "desc").limit(1)
-          .get().then(querySnapshot => {
-            const data = querySnapshot.docs.map(doc => doc.data());
-           const newobj = data[0].contador
-           const newmes = data[0].mes
-           console.log(newobj, newmes)
-
-            
-  
-            this.setState({ getDate: newobj, mes:newmes })
-          })
-      }
-
-
     
     onClickItem(e){
       
@@ -516,7 +461,7 @@ handleChangeProject= (e)=>{
 
   
     render() {
-        const {newOrder, list, items, consulta, getName, user, dateNew, message} = this.state;
+        const {newOrder, list, items, consulta, getName, user, dateNew, message, rol,} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -536,7 +481,8 @@ handleChangeProject= (e)=>{
           openModal:this.openModal,
           closeModal:this.closeModal,
           handleUpdate:this.handleUpdate,
-
+          onDelete: this.onDelete,
+          rol,
           message,
           newOrder,
           list,

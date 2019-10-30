@@ -13,7 +13,7 @@ import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class OrdenCreada extends React.Component {
 
     render() {
-        const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus}=this.context
+        const{ closeModal, modalIsOpen, consulta, handleUpdate, newestatus, handleChange, vendedor}=this.context
  
         // const{ list} = this.context}
         
@@ -24,6 +24,7 @@ class OrdenCreada extends React.Component {
             isOpen={modalIsOpen}
             toggle={closeModal}
             className="modal-inner-lista"
+            overlayClassName="Overlay"
               
             > 
             
@@ -42,11 +43,11 @@ class OrdenCreada extends React.Component {
                   <FormGroup row>
                     <Col sm={4}>
               <Label> Clave: </Label>
-              <Input type="text" value={item.productClave} ></Input>
+              <Input type="text"  value={item.productClave} ></Input>
               </Col>
              <Col sm={8}>
               <Label>Vendedor Ejecutivo:</Label>
-              <Input type="text" value={item.vendedor} ></Input>
+              <Input type="text" name="vendedor" value={vendedor}  placeholder={item.vendedor}onChange={handleChange} ></Input>
               </Col>
               <Col sm={4}>
               <Label> UGE: </Label> 
@@ -257,24 +258,17 @@ class OrdenCreada extends React.Component {
               <Label className="ot-color">FACTURAR</Label>
               <Input type="text"  ></Input>
               </Col>
-              
-              
-              
+
               </FormGroup>
               </Form>  
   
               </div>
               
-               
-                
-               
-           
-           
-             
-              
                 ))}
                   <hr/>   
                   <Button onClick={closeModal} >Cerrar</Button>
+
+                  <Button className="ml-1 btn-success"  onClick={handleUpdate}>Guardar</Button>
                  
               
            
