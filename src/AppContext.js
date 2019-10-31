@@ -249,7 +249,7 @@ handleChangeProject= (e)=>{
             return
         }   
            
-            let obtDate= new Date().toLocaleString();
+            let obtDate= new Date().toLocaleString();   
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
             const dateClave = obtDate.substr(2,3).replace("/","")
             const newDate = obtDate.slice(6, 8)
