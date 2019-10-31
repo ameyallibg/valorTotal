@@ -2,7 +2,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import {Button,   Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
 
@@ -39,21 +39,21 @@ class OrdenCreada extends React.Component {
               <Input type="text"  value={item.productClave} ></Input>
               </Col>
              <Col sm={8}>
-
+               
               <Label>Vendedor Ejecutivo:</Label>
-              <Input type="text" name="vendedor" value={vendedor}  placeholder={item.vendedor}onChange={handleChange} ></Input>
+              <Input name="vendedor" defaultValue={item.vendedor} onChange={handleChange} ></Input>
               </Col>
               <Col sm={4}>
               <Label> UGE: </Label> 
-              <Input type="text" value={item.uge}></Input>
+              <Input type="text" name="uge" value={item.uge}></Input>
               </Col>
               <Col sm={2}>
               <Label> FECHA OT: </Label> 
-              <Input type="text" value={item.dateNew}></Input>
+              <Input name="dateNew" type="text" value={item.dateNew}></Input>
               </Col>
               <Col sm={2}>
               <Label> ESTATUS: </Label> 
-              <Input type="text" name="newestatus" value={newestatus}  ></Input>
+              <Input type="text" defaultValue="" name="newestatus" value={newestatus}  ></Input>
               </Col>
               <Col sm={4}>
               <Label> COPIA PARA </Label> 
@@ -262,7 +262,7 @@ class OrdenCreada extends React.Component {
                   <hr/>   
                   <Button onClick={closeModal} >Cerrar</Button>
 
-              
+                  <Button className="ml-1 btn-success"  onClick={handleUpdate}>Guardar</Button>
                  
               
            

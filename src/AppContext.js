@@ -28,11 +28,13 @@ export const AppContext = React.createContext()
             newestatus:"",
             getName:"",
             modalIsOpen:false,
+            idItem:"",
            
             
            
         }
     this.onClickItem = this.onClickItem.bind(this)
+    this.onClickItemUpdate =this.onClickItemUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDate= this.handleChangeDate.bind(this)
     this.handleChangeFound = this.handleChangeFound.bind(this);
@@ -225,19 +227,19 @@ handleChangeProject= (e)=>{
 
   }
     handleUpdate=(e) =>{
-      
-      if(this.state.getName === this.state.vendedor ){
-        
-        this.setState({ 
-            [e.target.name]:e.target.value
-        })
-        console.log(this.state)
-        
-    }else {
-      console.log("no sirvo ")
-    }
+               
+    const newid=  this.state.idItem
+    const vendedor = this.state.vendedor
+    db.collection("orden").where("productClave", "==", newid )
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            db.collection("orden").doc(doc.id).update({ vendedor: vendedor    });
+        });
+   })
   }
-    
+
 
     //Validacion del formulario
     handleSubmit = (e)  => {
@@ -246,7 +248,7 @@ handleChangeProject= (e)=>{
         if(!this.validate()){
             return
         }   
-            document.getElementById("formClear").reset();  
+           
             let obtDate= new Date().toLocaleString();
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
             const dateClave = obtDate.substr(2,3).replace("/","")
@@ -284,7 +286,7 @@ handleChangeProject= (e)=>{
            })
 
           }
-          
+         
           this.setState({
             vendedor:"",
             uge:"",
@@ -404,11 +406,10 @@ handleChangeProject= (e)=>{
       
      let newid=  e.target.id
      console.log(newid)
-   
-     
+
       db.collection("orden").where("productClave", "==", newid)
-    .get()
-    .then(querySnapshot => {
+      .get()
+      .then(querySnapshot => {
         const data = querySnapshot.docs.map(doc => doc.data());
             
             console.log(data);
@@ -420,6 +421,26 @@ handleChangeProject= (e)=>{
           
 
     }
+    onClickItemUpdate(e){
+      
+      
+      let newid=  e.target.id
+       db.collection("orden").where("productClave", "==", newid)
+     .get()
+     .then(querySnapshot => {
+         const data = querySnapshot.docs.map(doc => doc.data());
+         const ven= data.vendedor
+         console.log(data
+          )
+            
+             this.setState({ idItem:newid, consulta: data ,  vendedor:ven,  modalIsOpen:true})
+             
+         });
+     
+        
+           
+ 
+     }
 
     deleteFilter() {
       document.getElementsByName("estatus")[0].value  = "";
@@ -467,6 +488,7 @@ handleChangeProject= (e)=>{
         value={{
         
           onClickItem: this.onClickItem,
+          onClickItemUpdate: this.onClickItemUpdate,
           handleChange: this.handleChange,
           handleChangeFound: this.handleChangeFound,
           handleChangeDate: this.handleChangeDate,

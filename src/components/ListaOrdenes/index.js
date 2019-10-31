@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Button, Input} from 'reactstrap';
 import OrdenCreada from "../../components/OrdenCreada"
+import EditarOrden from "../../components/EditarOrden"
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 
@@ -13,11 +14,12 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 import { AppContext} from "../../AppContext";
 OrdenCreada.contextType = AppContext;
+EditarOrden.contextType = AppContext;
 
 
 class  ListaOrdenes extends React.Component {
   render () {
-    const{items, onClickItem, rol, handleUpdate, getName, handleChangeFound , onDelete,  handleChangeDate, handleChangeSelect, deleteFilter, handleChangeSeller, handleChangeProject}=this.context
+    const{items, onClickItem, rol, handleUpdate, onClickItemUpdate, getName, handleChangeFound , onDelete,  handleChangeDate, handleChangeSelect, deleteFilter, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
       return (
       <div>
@@ -127,7 +129,7 @@ class  ListaOrdenes extends React.Component {
      
         <tr key={index} className="list">
           <td></td>
-          <td className="text-center"><EditOutlinedIcon id={item.productClave} onClick={onClickItem} /><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
+          <td className="text-center"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
@@ -144,6 +146,7 @@ class  ListaOrdenes extends React.Component {
      
       </Table>
     <OrdenCreada/>
+    <EditarOrden/>
   
     </div>
   );
@@ -268,6 +271,7 @@ class  ListaOrdenes extends React.Component {
    
     </Table>
   <OrdenCreada/>
+  <EditarOrden/>
 
   </div>
 );
