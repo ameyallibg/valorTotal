@@ -16,7 +16,7 @@ class  OrdenTrabajo extends React.Component {
     presentarse, visitador,
     telInsp, emailInsp, dirInsp, observaciones,
     bienes,otroBien,presupuesto, montoVendido, elaboro, estatus, facturar,modalIsOpen,  dateNew, info, otraInfo, emailCliente, delegacionSol, message, extInsp, handleChange ,handleSubmit, closeModal, } = this.context
-    if(rol === "admin"){
+    if(rol === "admin "){
     return ( 
         //Ceacion formulario
         <div className="div-form">
