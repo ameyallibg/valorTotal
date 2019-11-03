@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Modal from 'react-modal';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';

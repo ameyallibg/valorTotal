@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import {CustomInput, Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 
 
 class  OrdenTrabajo extends React.Component {
@@ -15,8 +15,8 @@ class  OrdenTrabajo extends React.Component {
     objetivo, otroObj, proposito, otroProp,
     presentarse, visitador,
     telInsp, emailInsp, dirInsp, observaciones,
-    bienes,otroBien,presupuesto, montoVendido, elaboro, estatus, facturar,modalIsOpen,  dateNew, info, otraInfo, emailCliente, delegacionSol, message, extInsp, handleChange ,handleSubmit, closeModal, } = this.context
-    if(rol === "admin "){
+    bienes,otroBien,presupuesto, comision, montoVendido, elaboro, estatus, facturar,modalIsOpen,  dateNew, info, otraInfo, emailCliente, delegacionSol, message, extInsp, handleChange ,handleSubmit, closeModal, } = this.context
+    if(rol === "admin"){
     return ( 
         //Ceacion formulario
         <div className="div-form">
@@ -63,7 +63,7 @@ class  OrdenTrabajo extends React.Component {
                 <Col sm={3}>
                 <Label sm={12} >Fecha OT<span className="text-danger">*</span> </Label>
                 <Col > 
-                    <Input  name="dateNew" value={dateNew} onChange={handleChange} type="date"/>
+                    <Input  readOnly name="dateNew" value={dateNew}  type="text"/>
                 </Col> 
                 </Col>  
                 <Col sm={3}>
@@ -609,7 +609,7 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={3}>
                     <Label sm={12}  >Vendedor Ejecutivo <span className="text-danger">*</span> </Label>
                     <Col >
-                        <Input  type="text" name="vendedor" value={getName}  >
+                        <Input  type="text" name="vendedor"  readOnly value={getName}    >
                       
                             
                             </Input>
@@ -618,7 +618,7 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={3}>
                     <Label sm={12} >Fecha OT<span className="text-danger">*</span> </Label>
                     <Col > 
-                        <Input  name="dateNew" value={dateNew} onChange={handleChange} type="date"/>
+                        <Input  readOnly  name="dateNew" value={dateNew} type="text"/>
                     </Col> 
                     </Col>  
                     <Col sm={3}>
@@ -700,14 +700,14 @@ class  OrdenTrabajo extends React.Component {
                
                     <Label sm={12}>Nombre <span className="text-danger">*</span>  </Label>
                     <Col >
-                        <Input  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
+                        <Input readOnly  className="form-size" type="text" name="nombreCliente" value={nombreCliente} onChange={handleChange} /> 
                     </Col> 
                     </Col>
                 <Col sm={5}>
               
                     <Label sm={12} >RFC </Label>
                     <Col >
-                        <Input  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
+                        <Input readOnly  type="text" name="rfcCliente" value={rfcCliente} onChange={handleChange}/> 
                     </Col>
                     </Col> 
                     
@@ -715,27 +715,27 @@ class  OrdenTrabajo extends React.Component {
                
                     <Label sm={12} >Dirección  </Label>
                     <Col sm={12}>
-                    <Input  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
+                    <Input readOnly  type="text" name="direccionCliente" value={direccionCliente} onChange={handleChange} /> 
                     </Col>
                 </FormGroup>
                 <FormGroup row>  
                     <Col sm={4}>
                     <Label sm={12}>Deleg/Municipio  </Label>
                     <Col>
-                    <Input  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
+                    <Input  readOnly  type="text" name="delegacionCliente"     value={delegacionCliente} onChange={handleChange} /> 
                     </Col>
                      </Col> 
                      <Col sm={4}>
                    
                      <Label  sm={12}>Ciudad/EDO </Label>
                     <Col>
-                     <Input  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
+                     <Input  readOnly  type="text" name="EDOCliente"   value={EDOCliente} onChange={handleChange} />
                         </Col>
                      </Col>
                      <Col sm={4}>
                      <Label  sm={12}>Atención </Label>
                     <Col sm={12}>
-                        <Input  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
+                        <Input  readOnly  type="text" name="atencion" value={atencion} onChange={handleChange} /> </Col>
                      </Col>
                 </FormGroup>
                
@@ -743,19 +743,19 @@ class  OrdenTrabajo extends React.Component {
                     <Col sm={4}>
                     <Label sm={12} >Teléfono <span className="text-danger">*</span> </Label>
                     <Col>
-                    <Input    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
+                    <Input readOnly    type="text" name="telCliente" value={telCliente} onChange={handleChange} />
                     </Col>
                      </Col> 
                      <Col sm={2}>
                     <Label sm={12}>Exten </Label>
                     <Col>
-                        <Input type="text"   name="extTel" value={extTel} onChange={handleChange} />
+                        <Input readOnly type="text"   name="extTel" value={extTel} onChange={handleChange} />
                         </Col>
                      </Col>
                      <Col sm={6}>
                      <Label  sm={12}>Correo electronico <span className="text-danger">*</span> </Label>
                     <Col>
-                    <Input   type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
+                    <Input  readOnly  type="email" name="emailCliente" value={emailCliente} onChange={handleChange} /> 
                     </Col>
                     </Col>
                 </FormGroup>
@@ -1063,40 +1063,24 @@ class  OrdenTrabajo extends React.Component {
                      <Col sm={3}>
                     <Label  sm={12}className="ot-color">PRESUPUESTO</Label>
                     <Col >
-                    <Input  type="text" name="presupuesto" value={presupuesto} onChange={handleChange} /> 
+                    <Input  type="number" name="presupuesto" value={presupuesto} onChange={handleChange} /> 
                     </Col>
                     </Col>
                     <Col sm={3}>
-                    <Label sm={12}className="ot-color">MONTO VENDIDO <span className="text-danger">*</span> </Label>
+                    <Label  sm={12}className="ot-color">COMISIÓN EXTERNA</Label>
+                    <Col >
+                    <Input  type="number" name="comision" value={comision} onChange={handleChange} /> 
+                    </Col>
+                    </Col>
+                    <Col sm={3}>
+                    <Label sm={12}className="ot-color">MONTO NETO VENDIDO <span className="text-danger">*</span> </Label>
                     <Col>
-                    <Input  type="text" name="montoVendido" value={montoVendido} onChange={handleChange} /> 
+                    <Input readOnly  type="number" name="montoVendido" value={montoVendido}  /> 
+                    <p className="text-muted">Todos los montos son sin objeto de IVA</p>
                     </Col>
                     </Col>
-                    <Col sm={2}>
-                    <Label sm={12} className="ot-color">ELABORO <span className="text-danger">*</span> </Label>
-                    <Col>
-                    <Input  type="select" name="elaboro" value={elaboro} onChange={handleChange} >
-                        <option value="RLS">RLS</option>
-                        <option value="VGS">VGS </option>
-                        <option value="DHS">DHS</option>
-                        <option value="JLB">JLB</option>
-    
-                    
-                    </Input> 
-                    </Col>
-                    </Col>
+                   
              
-                    <Col sm={2}>
-                    <Label sm={12}className="ot-color">ESTATUS <span className="text-danger">*</span> </Label>
-                    <Col>
-                    <Input  type="select" name="estatus" value={estatus} onChange={handleChange} >
-                        <option>Selecciona</option>
-                        <option>VENDIDO</option>
-                        <option>EN PROCESO</option>
-                        <option>CANCELADO</option>    
-                    </Input> 
-                    </Col>
-                    </Col>
                     <Col sm={2}>
                     <Label sm={11}className="ot-color">FACTURAR <span className="text-danger">*</span> </Label>
                     <Col>

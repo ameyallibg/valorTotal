@@ -127,13 +127,13 @@ class  ListaOrdenes extends React.Component {
             
             
      
-        <tr key={index} className="list">
+        <tr key={index}  className="list">
           <td></td>
           <td className="text-center"><EditOutlinedIcon id={item.productClave} onClick={onClickItemUpdate} /><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
           <td>{item.productClave}</td>
           <td>{item.vendedor}</td>
           <td>{item.uge}</td>
-          <td>{item.date}</td>
+          <td>{item.getNewDate}</td>
           <td>{item.estatus}</td>
           <td><DeleteOutlineOutlinedIcon id={item.productClave} onClick={onDelete}/></td>
         </tr>
@@ -258,7 +258,7 @@ class  ListaOrdenes extends React.Component {
         <td>{item.productClave}</td>
         <td>{item.vendedor}</td>
         <td>{item.uge}</td>
-        <td>{item.date}</td>
+        <td></td>
         <td>{item.estatus}</td>
         <td></td>
       </tr>

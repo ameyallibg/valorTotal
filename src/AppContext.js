@@ -14,11 +14,8 @@ export const AppContext = React.createContext()
         super(props)
         //Datos que se obtienen de las respuestas del formulario
         this.state ={
-            vendedor:"",
-            uge:"",
-            estatus:"",
+            vendedor:"", uge:"",  estatus:"",            
             productClave:"",
-            // dateNew: new Date().toLocaleString(),
             items:[] ,
             newcontador: 0,
             mes: [],
@@ -27,12 +24,20 @@ export const AppContext = React.createContext()
             buscador:"",
             newestatus:"",
             getName:"",
-            modalIsOpen:false,
             idItem:"",
+            copia:"",
+            oferta:"",
+            presupuesto: 0,
+            comision:0,
+            montoVendido:0,
+            dataClientes:[],
+            nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
+
            
             
            
         }
+    this.handleSubmitCliente = this.handleSubmitCliente.bind(this);
     this.onClickItem = this.onClickItem.bind(this)
     this.onClickItemUpdate =this.onClickItemUpdate.bind(this)
     this.handleChange = this.handleChange.bind(this);
@@ -63,11 +68,27 @@ export const AppContext = React.createContext()
         
         this.setState({ 
             [e.target.name]:e.target.value
+        },()=>{console.log(this.state)
+          const montoVendido= parseInt(this.state.presupuesto) + parseInt(this.state.comision)
+          this.setState({
+            montoVendido: montoVendido,
+           
+          })
         })
-        console.log(this.state)
+        
+       
         
         
     } 
+    handleChangeCost = (e)=>{
+        
+      this.setState({ 
+          [e.target.name]:e.target.value
+      })
+    
+      
+      
+  } 
     onDelete(e){
        
      const newid=  e.target.id
@@ -227,6 +248,7 @@ handleChangeProject= (e)=>{
 
   }
     handleUpdate=(e) =>{
+
                
     const newid=  this.state.idItem
     const vendedor = this.state.vendedor
@@ -240,8 +262,33 @@ handleChangeProject= (e)=>{
    })
   }
 
+  handleSubmitCliente =(e)=>{
+    e.preventDefault();
 
-    //Validacion del formulario
+      db.collection("clientes").add({
+        
+        nombre: this.state.nombreCliente,
+        rfc: this.state.rfcCliente,      
+        direccion: this.state.direccionCliente,
+        delegacion: this.state.delegacionCliente,
+        estado: this.state.EDOCliente,
+        atencion:this.state.atencion,
+        telefono: this.state.telCliente,
+        
+        email:this.state.emailCliente,
+        vendedor:this.state.getName,
+        date: firebase.firestore.FieldValue.serverTimestamp(),
+        getNewDate: new Date().toLocaleString(),
+      })
+
+      
+     
+      this.setState({
+        nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
+     }, () => {console.log(this.state.mes)})
+
+  }
+    //Validacion del for=mulario
     handleSubmit = (e)  => {
         
         e.preventDefault();
@@ -249,10 +296,10 @@ handleChangeProject= (e)=>{
             return
         }   
            
-            let obtDate= new Date().toLocaleString();   
+            let obtDate=  new Date().toLocaleDateString("zh-TW");   
             const ugeClave = this.state.uge.substr(0,3).toUpperCase(); 
-            const dateClave = obtDate.substr(2,3).replace("/","")
-            const newDate = obtDate.slice(6, 8)
+            const dateClave = obtDate.slice(5,7).replace("/","")
+            const newDate = obtDate.slice(0, 2)
             
            if(dateClave ===
              this.state.mes){
@@ -271,7 +318,18 @@ handleChangeProject= (e)=>{
               
         if(this.state.rol === "admin"){
                          
-          
+          db.collection("orden").add({
+            vendedor: this.state.vendedor,
+            uge: this.state.uge,      
+            estatus: this.state.estatus,
+            productClave: claveUnica,
+            contador: contador,
+            mes:dateClave,
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            getNewDate: new Date().toLocaleString(),
+         })
+
+        
 
           }else{
             db.collection("orden").add({
@@ -281,8 +339,8 @@ handleChangeProject= (e)=>{
               productClave: claveUnica,
               contador: contador,
               mes:dateClave,
-              date: new Date().toLocaleString(),
-              getNewDate: new Date().toLocaleDateString("zh-TW"),
+              date: firebase.firestore.FieldValue.serverTimestamp(),
+              getNewDate: new Date().toLocaleString(),
            })
 
           }
@@ -294,8 +352,8 @@ handleChangeProject= (e)=>{
             estatus:"",
             productClave:"",
             newcontador: contador,
-            dateNew: new Date().toLocaleString(),
-            getNewDate: new Date().toLocaleDateString(),
+           
+            
 
  
          }, () => {console.log(this.state.mes)})
@@ -303,7 +361,7 @@ handleChangeProject= (e)=>{
     }
    else {
     const contador = 1;
-    const claveUnica = dateClave + ugeClave + '00'+ contador
+    const claveUnica = newDate + dateClave + ugeClave + '00'+ contador
 
       db.collection("orden").add({
       
@@ -313,7 +371,7 @@ handleChangeProject= (e)=>{
         productClave: claveUnica,
         contador: contador,
         mes:dateClave,
-        date: new Date().toLocaleString(),
+        date: firebase.firestore.FieldValue.serverTimestamp(),
         getNewDate: new Date().toLocaleDateString("zh-TW"),
       
      })
@@ -324,8 +382,8 @@ handleChangeProject= (e)=>{
       estatus:"",
       productClave:"",
       newcontador: contador,
-      dateNew: new Date().toLocaleString(),
-      getNewDate: new Date().toLocaleDateString(),
+   
+     
 
       }, () => {console.log(this.state.mes)})
     }
@@ -390,6 +448,35 @@ handleChangeProject= (e)=>{
     }
   }
 
+  obtenerClientes=()=>{
+    const obtRol = this.state.rol
+    const obtName = this.state.getName
+    console.log(obtRol, obtName)
+    if(obtRol === "admin"){
+
+            db.collection("clientes").orderBy("date", "desc")
+              .get()
+              .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => doc.data());
+                console.log(data)
+                this.setState({ dataClientes: data});
+              
+              }, console.log(this.state.dataClientes));
+
+            } else{
+              db.collection("clientes").where("vendedor", "==", obtName).orderBy("date", "desc")
+              .get()
+              .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => doc.data());
+                console.log(data)
+
+                this.setState({ dataClientes:data});
+              }, console.log(this.state.dataClientes));
+            }
+            }
+
+
+
     componentDidMount() {
       const user =  firebase.auth().currentUser.email
       this.setState({
@@ -398,7 +485,15 @@ handleChangeProject= (e)=>{
       })
     
       db.collection("usuarios").onSnapshot(this.obtenerUser)
-      setTimeout(()=>{db.collection("orden").onSnapshot(this.obtenerBD)},1000)
+      
+      setTimeout(()=>{db.collection("orden").onSnapshot(this.obtenerBD)
+      
+    
+    },1000)
+    setTimeout(()=>{
+    db.collection("clientes").onSnapshot(this.obtenerClientes)
+  
+  },1000)
       }
     
     onClickItem(e){
@@ -482,7 +577,7 @@ handleChangeProject= (e)=>{
 
   
     render() {
-        const {newOrder, list, items, consulta, getName, user, dateNew, message, rol,} = this.state;
+        const {newOrder, list,dataClientes, items, consulta, getName, user, dateNew, message, rol, montoVendido, comision, presupuesto} = this.state;
       return (
         <AppContext.Provider
         value={{
@@ -495,6 +590,7 @@ handleChangeProject= (e)=>{
           handleChangeSeller:this.handleChangeSeller,
           handleChangeProject:this.handleChangeProject,
           handleChangeSelect: this.handleChangeSelect,
+          handleSubmitCliente: this.handleSubmitCliente,
           deleteFilter: this.deleteFilter,
           handleSubmit: this.handleSubmit ,
           handleLogout:this.handleLogout,
@@ -509,11 +605,15 @@ handleChangeProject= (e)=>{
           newOrder,
           list,
           items,
+          dataClientes,
           consulta,
           getName,
           user,
           dateNew,
-          
+          montoVendido,
+          comision,
+          presupuesto,
+         
 
         }}
         >

@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 // import Navegador from '../components/Navbar'
 import {BrowserRouter, Route} from 'react-router-dom'
-import ListaOrdenes from '../components/ListaOrdenes'
 import Home from '../components/Home'
+import ListaOrdenes from '../components/ListaOrdenes'
+
 import OrdenTrabajo from "../components/OrdenTrabajo"
+import DirectorioClientes from "../components/DirectorioClientes"
+import ListadoClientes from "../components/ListadoClientes"
 // import OrdenCreada from "./components/OrdenCreada"
 import { AppContext} from "../AppContext";
 import { NavLink } from "react-router-dom";
@@ -26,6 +29,8 @@ import {
 
 OrdenTrabajo.contextType = AppContext;
 ListaOrdenes.contextType = AppContext;
+DirectorioClientes.contextType = AppContext;
+ListadoClientes.contextType =AppContext;
 
 
 
@@ -81,7 +86,17 @@ class Menu extends Component  {
             <NavItem className="text-right "  ><CloseOutlinedIcon onClick={this.toggle}/></NavItem>
             <div className="left ml-10 text-left ">
             <NavItem  > <NavLink to="/ListaOrdenes">Orden de trabajo</NavLink></NavItem>
-            <NavItem>Directorio Clientes</NavItem>
+            <NavItem  > 
+                         <NavLink   to="/OrdenTrabajo">Crear</NavLink>
+            
+            
+            </NavItem>
+            <NavItem><NavLink to="/ListadoClientes">Directorio Clientes</NavLink></NavItem>
+            <NavItem  > 
+                         <NavLink   to="/Directorio Clientes">Crear</NavLink>
+            
+            
+            </NavItem>
             <NavItem>Historial de Ventas</NavItem>
             <NavItem>Agenda del vendedor</NavItem>
            
@@ -107,16 +122,12 @@ class Menu extends Component  {
             <Route exact path="/" render={() => <Home />} />
             <Route path="/OrdenTrabajo" render={() => <OrdenTrabajo />} />
             <Route path="/ListaOrdenes" render={() => <ListaOrdenes />} />
+            <Route path="/DirectorioClientes" render={() => <DirectorioClientes />} />
+            <Route path="/ListadoClientes" render={() => <ListadoClientes />} />
            
    </div>
       
       </BrowserRouter>
-      
-      
-      
-     
-     
-       
       
   );
 }

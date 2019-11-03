@@ -16,7 +16,8 @@ class  Home extends React.Component {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet nibh et nisl maximus lobortis.  </p>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+      <Button size="small"><Link to="/ListadoClientes">Ver Lista</Link></Button>
+        <Button size="small"><Link to="/DirectorioClientes">Crear</Link></Button>
       </CardActions>
       </Card>
             <Card className="card-style">
@@ -27,7 +28,8 @@ class  Home extends React.Component {
      </CardContent>
      <CardActions>
      
-        <Button size="small"><Link to="/ListaOrdenes">Ir a</Link></Button>
+        <Button size="small"><Link to="/ListaOrdenes">Ver Lista</Link></Button>
+        <Button size="small"><Link to="/OrdenTrabajo">Crear</Link></Button>
                 
     
      </CardActions>
