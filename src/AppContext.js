@@ -21,6 +21,7 @@ export const AppContext = React.createContext()
             mes: [],
             getDate:[],
             consulta:[],
+            consultaCliente:[],
             buscador:"",
             newestatus:"",
             getName:"",
@@ -31,6 +32,7 @@ export const AppContext = React.createContext()
             comision:0,
             montoVendido:0,
             dataClientes:[],
+            contClientes:[],
             nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
 
            
@@ -40,6 +42,8 @@ export const AppContext = React.createContext()
     this.handleSubmitCliente = this.handleSubmitCliente.bind(this);
     this.onClickItem = this.onClickItem.bind(this)
     this.onClickItemUpdate =this.onClickItemUpdate.bind(this)
+    this.onClickItemCliente = this.onClickItemCliente.bind(this)
+    this.onClickItemUpdateCliente =this.onClickItemUpdateCliente.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDate= this.handleChangeDate.bind(this)
     this.handleChangeFound = this.handleChangeFound.bind(this);
@@ -53,6 +57,7 @@ export const AppContext = React.createContext()
     this.handleChangeSeller = this.handleChangeSeller.bind(this);
     this.handleChangeProject = this.handleChangeProject.bind(this)
     this.onDelete = this.onDelete.bind(this)
+    this.onDeleteCliente = this.onDeleteCliente.bind(this)
   
     }
     //Funcion para cuando aparece el modal
@@ -107,12 +112,26 @@ export const AppContext = React.createContext()
     .catch(function(error) {
       console.log("Error getting documents: ", error);
     });
-
-     
- 
-  
-
     }
+    onDeleteCliente(e){
+       
+      const newid=  e.target.id
+      console.log(newid)
+      db.collection("clientes").where("clave", "==", newid )
+      .get()
+      .then(querySnapshot => {
+       querySnapshot.forEach((doc) => {
+         doc.ref.delete().then(() => {
+           console.log("Document successfully deleted!");
+         }).catch(function(error) {
+           console.error("Error removing document: ", error);
+         });
+       });
+     })
+     .catch(function(error) {
+       console.log("Error getting documents: ", error);
+     });
+     }
 
 
     handleChangeFound= (e)=>{
@@ -264,6 +283,16 @@ handleChangeProject= (e)=>{
 
   handleSubmitCliente =(e)=>{
     e.preventDefault();
+    let contador = parseInt(this.state.contClientes) + 1 ;
+    
+    let claveUnica;
+    if( contador < 10){ 
+      claveUnica =  '00'+ contador
+   } else if(contador < 100 && contador >= 10){
+      claveUnica =  '0'+ contador
+   } else { 
+      claveUnica =  contador
+   }
 
       db.collection("clientes").add({
         
@@ -274,7 +303,7 @@ handleChangeProject= (e)=>{
         estado: this.state.EDOCliente,
         atencion:this.state.atencion,
         telefono: this.state.telCliente,
-        
+        clave: claveUnica,
         email:this.state.emailCliente,
         vendedor:this.state.getName,
         date: firebase.firestore.FieldValue.serverTimestamp(),
@@ -284,7 +313,7 @@ handleChangeProject= (e)=>{
       
      
       this.setState({
-        nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
+        contClientes:"",nombreCliente:"", rfcCliente:"", direccionCliente:"", delegacionCliente:"", EDOCliente:"", atencion:"", telCliente:"", extTel:"",emailCliente:"",
      }, () => {console.log(this.state.mes)})
 
   }
@@ -457,9 +486,10 @@ handleChangeProject= (e)=>{
             db.collection("clientes").orderBy("date", "desc")
               .get()
               .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc => doc.data());
-                console.log(data)
-                this.setState({ dataClientes: data});
+                const data = querySnapshot.docs.map(doc =>  doc.data())
+                  const news = data[0].contador
+                this.setState({ dataClientes:data, contClientes: news});
+                
               
               }, console.log(this.state.dataClientes));
 
@@ -467,10 +497,10 @@ handleChangeProject= (e)=>{
               db.collection("clientes").where("vendedor", "==", obtName).orderBy("date", "desc")
               .get()
               .then(querySnapshot => {
-                const data = querySnapshot.docs.map(doc => doc.data());
+               const data =  querySnapshot.docs.map(doc => doc.data());
                 console.log(data)
-
-                this.setState({ dataClientes:data});
+                 const news = data[0].contador
+                this.setState({ dataClientes:data, contClientes:news});
               }, console.log(this.state.dataClientes));
             }
             }
@@ -489,13 +519,14 @@ handleChangeProject= (e)=>{
       setTimeout(()=>{db.collection("orden").onSnapshot(this.obtenerBD)
       
     
-    },1000)
+    },2000)
     setTimeout(()=>{
     db.collection("clientes").onSnapshot(this.obtenerClientes)
   
-  },1000)
+  },2000)
       }
     
+
     onClickItem(e){
       
       
@@ -536,7 +567,46 @@ handleChangeProject= (e)=>{
            
  
      }
-
+     onClickItemCliente(e){
+      
+      
+      let newid=  e.target.id
+      console.log(newid)
+ 
+       db.collection("clientes").where("clave", "==", newid)
+       .get()
+       .then(querySnapshot => {
+         const data = querySnapshot.docs.map(doc => doc.data());
+             
+             console.log(data);
+             this.setState({ consultaCliente: data , modalIsOpen:true})
+             
+         });
+     
+        
+           
+ 
+     }
+     onClickItemUpdateCliente(e){
+       
+       
+       let newid=  e.target.id
+        db.collection("clientes").where("clave", "==", newid)
+      .get()
+      .then(querySnapshot => {
+          const data = querySnapshot.docs.map(doc => doc.data());
+          const ven= data.vendedor
+          console.log(data
+           )
+             
+              this.setState({ idItem:newid, consultaCliente: data ,  vendedor:ven,  modalIsOpen:true})
+              
+          });
+      
+         
+            
+  
+      }
     deleteFilter() {
       document.getElementsByName("estatus")[0].value  = "";
       document.getElementsByName("buscador")[0].value = "";
@@ -600,6 +670,7 @@ handleChangeProject= (e)=>{
           closeModal:this.closeModal,
           handleUpdate:this.handleUpdate,
           onDelete: this.onDelete,
+          onDeleteCliente: this.onDeleteCliente,
           rol,
           message,
           newOrder,

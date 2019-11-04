@@ -20,7 +20,7 @@ DirectorioClientes.contextType =AppContext;
 
 class  ListadoClientes extends React.Component {
   render () {
-    const{ dataClientes}=this.context
+    const{ dataClientes, onDeleteCliente, onClickItemCliente, onClickItemUpdateCliente }=this.context
       return (
       <div>
                   <Link  className="text-white " to="/DirectorioClientes"><Button className='mt-2 mb-2 mr-3 float-right' color="success ">Crear</Button></Link>
@@ -109,13 +109,14 @@ class  ListadoClientes extends React.Component {
      
         <tr  className="list">
           <td></td>
-          <td className="text-center"><EditOutlinedIcon/><FindInPageOutlinedIcon  /></td>
+          <td className="text-center"><EditOutlinedIcon id={item.clave} onClick={onClickItemUpdateCliente}/><FindInPageOutlinedIcon  id={item.clave} onClick={onClickItemCliente}/></td>
+          <td>{item.clave}</td>
           <td>{item.nombre}</td>
           <td>{item.correo}</td>
           <td>{item.getNewDate}</td>
           <td>{item.estatus}</td>
           
-          <td><DeleteOutlineOutlinedIcon /></td>
+          <td><DeleteOutlineOutlinedIcon  id={item.clave} onClick={onDeleteCliente}/></td>
         </tr>
      
         ))

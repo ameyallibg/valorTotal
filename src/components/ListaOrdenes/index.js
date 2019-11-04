@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import FindInPageOutlinedIcon from '@material-ui/icons/FindInPageOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import db from "../../Fire.js";
+
+
 
 
 
@@ -17,7 +20,10 @@ OrdenCreada.contextType = AppContext;
 EditarOrden.contextType = AppContext;
 
 
+
+
 class  ListaOrdenes extends React.Component {
+ 
   render () {
     const{items, onClickItem, rol, handleUpdate, onClickItemUpdate, getName, handleChangeFound , onDelete,  handleChangeDate, handleChangeSelect, deleteFilter, handleChangeSeller, handleChangeProject}=this.context
     if(rol === "admin") {
@@ -254,7 +260,7 @@ class  ListaOrdenes extends React.Component {
    
       <tr key={index} className="list">
         <td></td>
-        <td className="text-center"><EditOutlinedIcon/><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
+        <td className="text-center"><EditOutlinedIcon  id={item.productClave} onClick={onClickItemUpdate}/><FindInPageOutlinedIcon  id={item.productClave} onClick={onClickItem}/></td>
         <td>{item.productClave}</td>
         <td>{item.vendedor}</td>
         <td>{item.uge}</td>
