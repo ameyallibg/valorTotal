@@ -10,7 +10,7 @@ import ListadoClientes from "../components/ListadoClientes"
 // import OrdenCreada from "./components/OrdenCreada"
 import { AppContext} from "../AppContext";
 import { NavLink } from "react-router-dom";
-import AnepsaLogo from "../assets/anepsa.png"
+import AnepsaLogo from "../assets/valortotal.png"
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';

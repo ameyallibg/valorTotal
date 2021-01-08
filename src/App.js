@@ -5,7 +5,7 @@ import './resources/styles.css';
 import Menu from './Router'
 import firebase from 'firebase';
 import ImgNegocios from './assets/negocios.jpg'
-import LogoAnepsa from './assets/anepsa.png'
+import AnepsaLogo from "./assets/valortotal.png"
 // import ImgNegocios from './assets/negocios.jpg'
 // import ListaOrdenes from './components/ListaOrdenes'
 // import OrdenTrabajo from "./components/OrdenTrabajo"
@@ -82,9 +82,9 @@ handleRender() {
       </div>
         <div className="login-right">
           <Form className="login">
-            <img src={LogoAnepsa} alt="logo-anepsa" className="LogoAnepsa"></img>
+            <img src={AnepsaLogo} alt="logo-anepsa" className="LogoAnepsa"></img>
             
-            {/* <Label className="font-label-sub">Gestión de Ordenes de Trabajo</Label> */}
+            <Label className="font-label-sub">Gestión de Ordenes de Trabajo</Label>
             <FormGroup className="text-important">
             <hr/>
             <Label>Correo Electrónico</Label>

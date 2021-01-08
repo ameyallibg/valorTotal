@@ -42,12 +42,9 @@ class  ListadoClientes extends React.Component {
           <th>
             <Input type="select" name="nombreVendedor" >
                 <option value="">Vendedor</option>
-                <option value="Ameyalli Brito González">Ame</option>
-                        <option value="Yozebeth Brito González">Yoz</option>
-                        <option value="Lazo Santiago Rubens">Lazo Santiago Rubens</option>
-                        <option value="Vicente Galicia Salazar">Vicente Galicia Salazar</option>
-                        <option value="America Jimenez Carlon">America Jimenez Carlon</option>
-                        <option value="Daniel Hurtado Sanchez">Daniel Hurtado Sanchez</option>
+                <option value="Ameyalli Brito González">Ameyalli Yozebeth Brito González</option>
+                        <option value="Yozebeth Brito González">Luis Fernando Zugarazo Palomares</option>
+ 
                 
             </Input>
           </th>
