@@ -74,11 +74,11 @@ handleRender() {
             <FormGroup className="text-important">
             <hr/>
             <Label>Correo Electrónico</Label>
-              <Input type="email" id="email" ></Input>
+              <Input type="email" placeholder="bgameyalli@gmail.com" id="email" ></Input>
               </FormGroup>
               <FormGroup className="text-important">
             <Label >Contraseña</Label>
-            <Input type="password"  id="password"></Input>
+            <Input type="password" placeholder="Test123" id="password"></Input>
             </FormGroup>
       
         <Button  onClick={this.handleAuth}>Iniciar Sesión</Button>
