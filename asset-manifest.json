@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/valorTotal/static/css/main.3e6b134c.chunk.css",
-    "main.js": "/valorTotal/static/js/main.bf054a08.chunk.js",
-    "main.js.map": "/valorTotal/static/js/main.bf054a08.chunk.js.map",
+    "main.css": "/valorTotal/static/css/main.6faf2916.chunk.css",
+    "main.js": "/valorTotal/static/js/main.7980d490.chunk.js",
+    "main.js.map": "/valorTotal/static/js/main.7980d490.chunk.js.map",
     "runtime-main.js": "/valorTotal/static/js/runtime-main.023578e8.js",
     "runtime-main.js.map": "/valorTotal/static/js/runtime-main.023578e8.js.map",
-    "static/css/2.0624914a.chunk.css": "/valorTotal/static/css/2.0624914a.chunk.css",
-    "static/js/2.8a76394f.chunk.js": "/valorTotal/static/js/2.8a76394f.chunk.js",
-    "static/js/2.8a76394f.chunk.js.map": "/valorTotal/static/js/2.8a76394f.chunk.js.map",
+    "static/css/2.9a15f861.chunk.css": "/valorTotal/static/css/2.9a15f861.chunk.css",
+    "static/js/2.a303289f.chunk.js": "/valorTotal/static/js/2.a303289f.chunk.js",
+    "static/js/2.a303289f.chunk.js.map": "/valorTotal/static/js/2.a303289f.chunk.js.map",
     "index.html": "/valorTotal/index.html",
-    "precache-manifest.5cece55160b0151f1fe42cddc96a884b.js": "/valorTotal/precache-manifest.5cece55160b0151f1fe42cddc96a884b.js",
+    "precache-manifest.3141f32bd8d4c271a560c9b6d355f497.js": "/valorTotal/precache-manifest.3141f32bd8d4c271a560c9b6d355f497.js",
     "service-worker.js": "/valorTotal/service-worker.js",
-    "static/css/2.0624914a.chunk.css.map": "/valorTotal/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.3e6b134c.chunk.css.map": "/valorTotal/static/css/main.3e6b134c.chunk.css.map",
-    "static/media/cliente.png": "/valorTotal/static/media/cliente.0f42d492.png",
-    "static/media/estadisticas.png": "/valorTotal/static/media/estadisticas.ca13ec1c.png",
-    "static/media/negocios.jpg": "/valorTotal/static/media/negocios.fbb02c6c.jpg"
+    "static/css/2.9a15f861.chunk.css.map": "/valorTotal/static/css/2.9a15f861.chunk.css.map",
+    "static/css/main.6faf2916.chunk.css.map": "/valorTotal/static/css/main.6faf2916.chunk.css.map",
+    "static/media/all.min.css": "/valorTotal/static/media/fa-solid-900.c2801fb4.svg",
+    "static/media/negocios.jpg": "/valorTotal/static/media/negocios.44634da7.jpg"
   }
 }
