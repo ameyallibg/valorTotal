@@ -1,8 +1,14 @@
 .ot-color{
     color:#6161c1;
-    margin: 20px;
+    /* margin: 20px; */
     width: auto;
     font-size:1.1vw;
+}
+.color-gray{
+    color:gray;
+    font-size:1.1vw;
+    width: auto;
+
 }
 .ot-center{
     text-align: center;
@@ -22,10 +28,16 @@
 .center-box{
     display: flex;
     flex-direction: column;
-    padding: 5%;
+    padding: 4%;
     position: relative;
 
 
+}
+.col-form-label {
+    font-size: 1vw !important;
+}
+.form-control{
+    font-size:1vw !important;
 }
 a span {
     height: 1px;
@@ -63,6 +75,7 @@ a span {
     
     
 }
+
 
 .text-align-left{
     text-align: left
@@ -172,6 +185,46 @@ a span {
     background-color: #0d0e0e8a;
     z-index:5;
 }
+.icono-excel{
+    font-size: 2vw;
+    color:green
+   
+}
+.icono-pdf{
+    font-size: 2vw;
+    color:red
+
+}
+.ocultar{
+    display:none;
+}
+.clave{
+    height: 1.4em;
+    background-image: url("../assets/editar.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat; 
+}
+
+.busqueda{
+    height: 1.4em;
+    background-image: url("../assets/expediente.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat
+
+}
+.borrar{
+    height: 1.4em;
+    background-image: url("../assets/borrar.png");
+    background-position-x: center;
+     background-size: contain;
+    background-repeat: no-repeat
+
+}
+.toUppercase{
+    /* text-transform: lowercase; */
+}
 
 @media(min-width: 680px){
 
@@ -181,6 +234,8 @@ a span {
     
     
 }
+
+
 
 
 
@@ -220,17 +275,23 @@ a span {
     
     }
 
+    
     .center-box{
-        margin-left: 4%;
-        margin-right: 4%;
+        /* margin-left: 4%;
+        margin-right: 4%; */
         
 
-        padding-top:2%;
+        padding-top:1%;
+        padding-bottom: 0% !important;
         border-width: thin;
         border-color: gray;
 
         
 
+    }
+    .form-ocultar{
+        margin-bottom:0%!important;
+        
     }
     .flex-direction-row{
         display: flex;
@@ -259,8 +320,15 @@ a span {
     }
     .div-form{
         padding-top: 3%;
+        padding-left:3%;
+        padding-right:3%;
         background: linear-gradient(to bottom, #e9f4ff 0%, #dde3f3 7%, #cdcde2 19%, #b8b5d0 31%, #ceccda 44%, #c3d1d8 55%, #cad9e0 67%, #e7e6ea 77%, #c3bde4 89%, #ccd3dc 100%)
     }
+    .div-form-ocultar{
+        padding-top: 0%;
+        padding-left:0%;
+        padding-right: 0%;
+        }
     .style-form{
         
         background: white;
@@ -291,6 +359,7 @@ a span {
     width: 100%;
    }
 
+  
    
    
    

@@ -3,11 +3,11 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+
+import Clientes from '../../assets/cliente.jpg'
+import Orden from '../../assets/documento.jpg'
+import Estadísticas from '../../assets/estadisticas.jpg'
 import { Link } from 'react-router-dom';
-import AnepsaLogo from "../../assets/valortotal.png"
-import Estadisticas from "../../assets/estadisticas.png"
-import Cliente from "../../assets/cliente.png"
-import Orden from "../../assets/documento.png"
 
 class  Home extends React.Component {
 
@@ -16,21 +16,20 @@ class  Home extends React.Component {
       <div className="card-home">
       <Card className="card-style">
              <CardContent>
-             <img src={Cliente} alt="logo-anepsa" className="LogoAnepsa"></img>
+             <img src={Clientes} alt="logo-anepsa" className="LogoAnepsa"></img>
         <p>Directorio de Clientes</p>
-        {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet nibh et nisl maximus lobortis.  </p> */}
+
       </CardContent>
       <CardActions>
       <Button size="small"><Link to="/ListadoClientes">Ver Lista</Link></Button>
-        <Button size="small"><Link to="/DirectorioClientes">Crear</Link></Button>
+        <Button size="small"><Link to="/CrearCliente">Crear</Link></Button>
       </CardActions>
       </Card>
             <Card className="card-style">
             <CardContent>
-            <img src={Orden} alt="logo-anepsa" className="LogoAnepsa"></img>
+      
+       <img src={Orden} alt="logo-anepsa" className="LogoAnepsa"></img>
        <p>Orden de Trabajo</p>
-       {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet nibh et nisl maximus lobortis.  </p> */}
-    
      </CardContent>
      <CardActions>
      
@@ -42,16 +41,15 @@ class  Home extends React.Component {
      </Card>
      <Card className="card-style">
             <CardContent>
-            <img src={Estadisticas} alt="logo-anepsa" className="LogoAnepsa"></img>
+       
+       <img src={Estadísticas} alt="logo-anepsa" className="LogoAnepsa"></img>
        <p>Estadísticas</p>
-    
-    
      </CardContent>
      <CardActions>
        <Button size="small">Learn More</Button>
      </CardActions>
      </Card>
-
+    
      
      </div>
 
